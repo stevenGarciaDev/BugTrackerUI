@@ -1,5 +1,6 @@
 import { Switch, Route } from 'react-router-dom';
 import Navbar from './components/navbar';
+import LandingPage from './pages/landing-page';
 import CreateProject from './pages/create-project';
 import CreateTicket from './pages/create-ticket';
 import Dashboard from './pages/dashboard';
@@ -28,6 +29,7 @@ function App() {
         <Route path="/projects" component={Projects} />
         <Route path="/manageRoles" component={ManageRoles} />
         <Route path="/userProfile" component={UserProfile} />
+        <Route path="/" component={LandingPage} />
       </Switch>
     </div>
   );
