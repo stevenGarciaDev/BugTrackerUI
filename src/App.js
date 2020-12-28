@@ -1,5 +1,9 @@
 import { Switch, Route } from 'react-router-dom';
-import Navbar from './components/navbar';
+import { ThemeProvider } from 'styled-components';
+import { Normalize } from 'styled-normalize'
+import theme from './theme';
+import GlobalStyle from './GlobalStyle';
+import LandingPageNavbar from './components/landing-page-navbar';
 import LandingPage from './pages/landing-page';
 import CreateProject from './pages/create-project';
 import CreateTicket from './pages/create-ticket';
@@ -16,8 +20,10 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
+    <ThemeProvider theme={theme}>
+      <Normalize />
+      <GlobalStyle />
+      <LandingPageNavbar />
       <Switch>
         <Route path="/project/create" component={CreateProject} />
         <Route path="/ticket/create" component={CreateTicket} />
@@ -31,7 +37,7 @@ function App() {
         <Route path="/userProfile" component={UserProfile} />
         <Route path="/" component={LandingPage} />
       </Switch>
-    </div>
+    </ThemeProvider>
   );
 }
 

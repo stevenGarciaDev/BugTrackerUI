@@ -1,150 +1,23 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
-const Header = styled.section`
-    align-items: center;
-    background-color: #28384c;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    height: 300px;
-    padding: 0 30px;
-    justify-content: center;
-`;
-
-const Title = styled.h1`
-    font-size: 22px;
-    text-align: center;
-
-    @media screen and (min-width: 800px) {
-        font-size: 28px;
-    }
-`;
-
-const Subtitle = styled.h2`
-    font-size: 19px;
-
-    @media screen and (min-width: 800px) {
-        font-size: 25px;
-    }
-`;
-
-const Paragraph = styled.p`
-    font-size: 17px;
-
-    @media screen and (min-width: 800px) {
-        font-size: 22px;
-    }
-`;
-
-const ButtonLink = styled(Link)`
-    background-color: #6576ff;
-    border: 1px solid white;
-    border-radius: 5px;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    width: 120px;
-`;
-
-const TicketSection = styled.section`
-    padding: 20px 10px;
-
-    @media screen and (min-width: 1000px) {
-        margin: 0 auto;
-        width: 80%;
-    }
-`;
-
-const DashboardSection = styled.section`
-    background-color: #28384c;
-    color: white;
-    padding: 20px 10px;
-`;
-
-const SectionContent = styled.div`
-    @media screen and (min-width: 1000px) {
-        margin: 0 auto;
-        width: 80%;
-    }
-`;
-
-const ProjectSection = styled.section`
-    padding: 20px 10px;
-
-    @media screen and (min-width: 1000px) {
-        margin: 0 auto;
-        width: 80%;
-    }
-`;
-
-const DemoSection = styled.section`
-    background-color: #28384c;
-    color: white;
-    padding: 20px 10px;
-    text-align: center;
-`;
-
-const DemoUsersContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-
-    @media screen and (min-width: 1000px) {
-        flex-direction: row;
-        margin-top: 40px;
-    }
-`;
-
-const UserTypeContainer = styled.div`
-    border: 1px solid white;
-    border-radius: 5px;
-    flex: 1;
-    margin: 0 10px 30px;
-    padding: 10px;
-    position: relative;
-    text-align: center;
-
-    @media screen and (min-width: 1000px) {
-        padding-top: 80px;
-        height: 450px;
-    }
-`;
-
-const UserType = styled.h2`
-
-`;
-
-const UserAccess = styled.h3`
-
-`;
-
-const UserDescription = styled.p`
-
-`;
-
-const DemoButtonContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-
-    @media screen and (min-width: 1000px) {
-        position: absolute;
-        width: 100%;
-        left: 0;
-        bottom: 50px;
-    }
-
-    @media screen and (min-width: 1300px) {
-        bottom: 80px;
-    }
-`;
-
-const UserButtonLink = styled(ButtonLink)`
-    display: block;
-    margin: 10px auto;
-`;
+import { 
+    Header,
+    Title,
+    Subtitle,
+    Paragraph,
+    ButtonLink,
+    TicketSection,
+    DashboardSection,
+    SectionContent,
+    ProjectSection,
+    DemoSection,
+    DemoUsersContainer,
+    UserTypeContainer,
+    UserType,
+    UserAccess,
+    UserDescription,
+    DemoButtonContainer,
+    UserButtonLink
+} from './landing-page.styles';
 
 const LandingPage = () => (
     <div>
@@ -154,7 +27,7 @@ const LandingPage = () => (
                 An easy-to-use bug tracking application designed for teams. 
                 Easily create tickets, projects, and manage roles for secure access.
             </Paragraph>
-            <ButtonLink to='/login'>DEMO</ButtonLink>
+            <ButtonLink as="a" href="#demo">DEMO</ButtonLink>
         </Header>
         <TicketSection>
             <Title>Tickets - Where It All Begins</Title>
@@ -203,7 +76,7 @@ const LandingPage = () => (
             </Paragraph>
             <Paragraph>Much like the dashboard, every project contains data visualized through graphs.</Paragraph>
         </ProjectSection>
-        <DemoSection>
+        <DemoSection id="demo">
             <SectionContent>
             <Title>One-Click Demo</Title>
             <Paragraph>Login as a demo user to take a peak around, no sign in required!</Paragraph>
