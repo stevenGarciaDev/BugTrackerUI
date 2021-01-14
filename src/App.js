@@ -23,8 +23,9 @@ import UserProfile from './pages/user-profile';
 import './App.css';
 
 const MainContent = styled.div`
-  border: 1px solid black;
   float: right;
+  margin-top: 30px;
+  padding: 30px;
   width: 100%;
 
   @media screen and (min-width: 700px) {
