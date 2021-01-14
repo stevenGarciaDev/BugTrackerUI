@@ -1,28 +1,51 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import {
+  Sidebar,
+  NavContainer,
+  NavSection,
+  NavSectionName,
+  NavItem,
+  OpenSidebarIcon,
+  CloseSidebarIcon,
+} from './sidebar-nav.styles';
 
-const Container = styled.div`
-    background-color: #171A40;
-    padding: 30px;
-    position: fixed;
-    left: 0;
-    height: 100vh;
-    top: 0;
-    width: 40%;
-    max-width: 340px;
-    z-index: 2;
-`;
-
-const NavItem = styled.div`
-    margin: 10px;
-`;
-
-const SidebarNav = () => (
-  <Container>
-    <NavItem>Login</NavItem>
-    <NavItem>Register</NavItem>
-    <NavItem>DEMO</NavItem>
-  </Container>
-);
+const SidebarNav = () => {
+  const [isSidebarVisible, setSidebarVisibility] = useState(true);
+  return (
+    <div>
+      {isSidebarVisible
+        ? (
+          <CloseSidebarIcon
+            fontSize="large"
+            onClick={() => setSidebarVisibility(!isSidebarVisible)}
+          />
+        )
+        : (
+          <OpenSidebarIcon
+            fontSize="large"
+            onClick={() => setSidebarVisibility(!isSidebarVisible)}
+          />
+        )}
+      <Sidebar isVisible={isSidebarVisible}>
+        <NavContainer>
+          <NavSection>
+            <NavSectionName>PROJECTS</NavSectionName>
+            <NavItem>View Projects</NavItem>
+            <NavItem>Create New Projects</NavItem>
+          </NavSection>
+          <NavSection>
+            <NavSectionName>TICKETS</NavSectionName>
+            <NavItem>View Tickets</NavItem>
+            <NavItem>Create New Ticket</NavItem>
+          </NavSection>
+          <NavSection>
+            <NavSectionName>MANAGE</NavSectionName>
+            <NavItem>User Roles</NavItem>
+          </NavSection>
+        </NavContainer>
+      </Sidebar>
+    </div>
+  );
+};
 
 export default SidebarNav;

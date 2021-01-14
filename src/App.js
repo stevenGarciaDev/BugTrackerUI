@@ -5,7 +5,7 @@ import { Normalize } from 'styled-normalize';
 import theme from './theme';
 import GlobalStyle from './GlobalStyle';
 import SidebarNav from './components/sidebar-nav';
-import LandingPageNavbar from './components/landing-page-navbar';
+import UserTopNav from './components/user-top-nav';
 import LandingPage from './pages/landing-page';
 import CreateProject from './pages/create-project';
 import CreateTicket from './pages/create-ticket';
@@ -17,7 +17,6 @@ import Register from './pages/register';
 import ResetPassword from './pages/reset-password';
 import Tickets from './pages/tickets';
 import UserProfile from './pages/user-profile';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -25,7 +24,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Normalize />
       <GlobalStyle />
-      {/* <LandingPageNavbar /> */}
+      <UserTopNav />
       <SidebarNav />
       <Switch>
         <Route path="/project/create" component={CreateProject} />
