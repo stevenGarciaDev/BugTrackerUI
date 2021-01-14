@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+/* eslint-disable no-shadow */
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   Sidebar,
   NavContainer,
@@ -8,44 +11,58 @@ import {
   OpenSidebarIcon,
   CloseSidebarIcon,
 } from './sidebar-nav.styles';
+import { selectSidebarStatus } from '../../store/sidebar/sidebar.selector';
+import { openSidebar, closeSidebar } from '../../store/sidebar/sidebar.actions';
 
-const SidebarNav = () => {
-  const [isSidebarVisible, setSidebarVisibility] = useState(true);
-  return (
-    <div>
-      {isSidebarVisible
-        ? (
-          <CloseSidebarIcon
-            fontSize="large"
-            onClick={() => setSidebarVisibility(!isSidebarVisible)}
-          />
-        )
-        : (
-          <OpenSidebarIcon
-            fontSize="large"
-            onClick={() => setSidebarVisibility(!isSidebarVisible)}
-          />
-        )}
-      <Sidebar isVisible={isSidebarVisible}>
-        <NavContainer>
-          <NavSection>
-            <NavSectionName>PROJECTS</NavSectionName>
-            <NavItem>View Projects</NavItem>
-            <NavItem>Create New Projects</NavItem>
-          </NavSection>
-          <NavSection>
-            <NavSectionName>TICKETS</NavSectionName>
-            <NavItem>View Tickets</NavItem>
-            <NavItem>Create New Ticket</NavItem>
-          </NavSection>
-          <NavSection>
-            <NavSectionName>MANAGE</NavSectionName>
-            <NavItem>User Roles</NavItem>
-          </NavSection>
-        </NavContainer>
-      </Sidebar>
-    </div>
-  );
+const SidebarNav = ({ isSidebarOpen, openSidebarNav, closeSidebarNav }) => (
+  <div>
+    {isSidebarOpen
+      ? (
+        <CloseSidebarIcon
+          fontSize="large"
+          onClick={() => closeSidebarNav()}
+        />
+      )
+      : (
+        <OpenSidebarIcon
+          fontSize="large"
+          onClick={() => openSidebarNav()}
+        />
+      )}
+    <Sidebar isVisible={isSidebarOpen}>
+      <NavContainer>
+        <NavSection>
+          <NavSectionName>PROJECTS</NavSectionName>
+          <NavItem to="/projects">View Projects</NavItem>
+          <NavItem to="/project/create">Create New Projects</NavItem>
+        </NavSection>
+        <NavSection>
+          <NavSectionName>TICKETS</NavSectionName>
+          <NavItem to="/tickets">View Tickets</NavItem>
+          <NavItem to="/ticket/create">Create New Ticket</NavItem>
+        </NavSection>
+        <NavSection>
+          <NavSectionName>MANAGE</NavSectionName>
+          <NavItem to="/manageRoles">User Roles</NavItem>
+        </NavSection>
+      </NavContainer>
+    </Sidebar>
+  </div>
+);
+
+const mapStateToProps = (state) => ({
+  isSidebarOpen: selectSidebarStatus(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  openSidebarNav: () => dispatch(openSidebar()),
+  closeSidebarNav: () => dispatch(closeSidebar()),
+});
+
+SidebarNav.propTypes = {
+  isSidebarOpen: PropTypes.bool.isRequired,
+  openSidebarNav: PropTypes.func.isRequired,
+  closeSidebarNav: PropTypes.func.isRequired,
 };
 
-export default SidebarNav;
+export default connect(mapStateToProps, mapDispatchToProps)(SidebarNav);

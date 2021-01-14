@@ -1,7 +1,10 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { Normalize } from 'styled-normalize';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { selectSidebarStatus } from './store/sidebar/sidebar.selector';
 import theme from './theme';
 import GlobalStyle from './GlobalStyle';
 import SidebarNav from './components/sidebar-nav';
@@ -19,28 +22,48 @@ import Tickets from './pages/tickets';
 import UserProfile from './pages/user-profile';
 import './App.css';
 
-function App() {
+const MainContent = styled.div`
+  border: 1px solid black;
+  float: right;
+  width: 100%;
+
+  @media screen and (min-width: 700px) {
+    width: ${(props) => (props.isSidebarOpen ? 'calc(100% - 290px)' : '100%')};
+  }
+`;
+
+function App({ isSidebarOpen }) {
   return (
     <ThemeProvider theme={theme}>
       <Normalize />
       <GlobalStyle />
       <UserTopNav />
       <SidebarNav />
-      <Switch>
-        <Route path="/project/create" component={CreateProject} />
-        <Route path="/ticket/create" component={CreateTicket} />
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-        <Route path="/resetPassword" component={ResetPassword} />
-        <Route path="/tickets" component={Tickets} />
-        <Route path="/projects" component={Projects} />
-        <Route path="/manageRoles" component={ManageRoles} />
-        <Route path="/userProfile" component={UserProfile} />
-        <Route path="/" component={LandingPage} />
-      </Switch>
+      <MainContent isSidebarOpen={isSidebarOpen}>
+        <Switch>
+          <Route path="/project/create" component={CreateProject} />
+          <Route path="/ticket/create" component={CreateTicket} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/resetPassword" component={ResetPassword} />
+          <Route path="/tickets" component={Tickets} />
+          <Route path="/projects" component={Projects} />
+          <Route path="/manageRoles" component={ManageRoles} />
+          <Route path="/userProfile" component={UserProfile} />
+          <Route path="/" component={LandingPage} />
+        </Switch>
+      </MainContent>
     </ThemeProvider>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  isSidebarOpen: selectSidebarStatus(state),
+});
+
+App.propTypes = {
+  isSidebarOpen: PropTypes.bool.isRequired,
+};
+
+export default connect(mapStateToProps)(App);
