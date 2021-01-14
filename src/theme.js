@@ -8,7 +8,7 @@ const theme = {
   font: {
     family: {
       default: "'Open Sans', sans-serif",
-      headline: "'Poppins', sans-serif",
+      headline: "'Noto Sans HK', sans-serif",
     },
   },
 };
