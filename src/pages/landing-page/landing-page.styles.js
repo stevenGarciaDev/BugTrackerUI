@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const Header = styled.section`
     align-items: center;
-    background-color: ${props => props.theme.colors.darkBlue};
+    background-color: ${(props) => props.theme.colors.darkBlue};
     color: white;
     display: flex;
     flex-direction: column;
@@ -12,7 +12,7 @@ export const Header = styled.section`
 `;
 
 export const Title = styled.h1`
-    font-family: ${props => props.theme.font.family.headline};
+    font-family: ${(props) => props.theme.font.family.headline};
     font-size: 22px;
     text-align: center;
 
@@ -38,7 +38,7 @@ export const Paragraph = styled.p`
 `;
 
 export const ButtonLink = styled(Link)`
-    background-color: ${props => props.theme.colors.lightBlue};
+    background-color: ${(props) => props.theme.colors.lightBlue};
     border: 1px solid white;
     border-radius: 5px;
     color: white;
@@ -58,7 +58,7 @@ export const TicketSection = styled.section`
 `;
 
 export const DashboardSection = styled.section`
-    background-color: ${props => props.theme.colors.darkBlue};
+    background-color: ${(props) => props.theme.colors.darkBlue};
     color: white;
     padding: 20px 10px;
 `;
@@ -80,7 +80,7 @@ export const ProjectSection = styled.section`
 `;
 
 export const DemoSection = styled.section`
-    background-color: ${props => props.theme.colors.darkBlue};
+    background-color: ${(props) => props.theme.colors.darkBlue};
     color: white;
     padding: 20px 10px;
     text-align: center;

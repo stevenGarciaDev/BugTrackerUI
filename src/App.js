@@ -1,8 +1,10 @@
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { Normalize } from 'styled-normalize'
+import { Normalize } from 'styled-normalize';
 import theme from './theme';
 import GlobalStyle from './GlobalStyle';
+import SidebarNav from './components/sidebar-nav';
 import LandingPageNavbar from './components/landing-page-navbar';
 import LandingPage from './pages/landing-page';
 import CreateProject from './pages/create-project';
@@ -23,7 +25,8 @@ function App() {
     <ThemeProvider theme={theme}>
       <Normalize />
       <GlobalStyle />
-      <LandingPageNavbar />
+      {/* <LandingPageNavbar /> */}
+      <SidebarNav />
       <Switch>
         <Route path="/project/create" component={CreateProject} />
         <Route path="/ticket/create" component={CreateTicket} />

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export const Nav = styled.nav`
     align-items: center;
-    background-color: ${props => props.theme.colors.darkBlue};
+    background-color: ${(props) => props.theme.colors.darkBlue};
     color: white;
     display: flex;
     justify-content: space-between;
@@ -64,7 +64,7 @@ export const NavItem = styled(Link)`
 `;
 
 export const NavButtonLink = styled(Link)`
-    background-color: ${props => props.theme.colors.lightBlue};
+    background-color: ${(props) => props.theme.colors.lightBlue};
     border: 1px solid white;
     border-radius: 5px;
     color: white;
