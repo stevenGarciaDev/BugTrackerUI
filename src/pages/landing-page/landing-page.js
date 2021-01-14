@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import {
   Header,
@@ -74,10 +75,14 @@ const LandingPage = () => (
     <ProjectSection>
       <Title>Projects - the organization and management of your software</Title>
       <Paragraph>
-        Organize your development needs into projects. These projects each contain their own assigned projected
+        Organize your development needs into projects. These projects each contain
+        their own assigned projected
         manager, developer, and submitter.
       </Paragraph>
-      <Paragraph>Much like the dashboard, every project contains data visualized through graphs.</Paragraph>
+      <Paragraph>
+        Much like the dashboard, every project contains data visualized
+        through graphs.
+      </Paragraph>
     </ProjectSection>
     <DemoSection id="demo">
       <SectionContent>
@@ -87,7 +92,9 @@ const LandingPage = () => (
           <UserTypeContainer>
             <UserType>Admin</UserType>
             <UserAccess>Unlimited Access</UserAccess>
-            <UserDescription>A focus on their own projects with edit access to anything at the project level.</UserDescription>
+            <UserDescription>
+              A focus on their own projects with edit access to anything at the project level.
+            </UserDescription>
             <DemoButtonContainer>
               <UserButtonLink to="/login">Demo</UserButtonLink>
             </DemoButtonContainer>
@@ -117,7 +124,8 @@ const LandingPage = () => (
             <UserType>Submitter</UserType>
             <UserAccess>Limited Access</UserAccess>
             <UserDescription>
-              The strictest of access levels. Can view most things but can only interact with their own tickets.
+              The strictest of access levels. Can view most things
+              but can only interact with their own tickets.
             </UserDescription>
             <DemoButtonContainer>
               <UserButtonLink to="/login">Demo</UserButtonLink>
