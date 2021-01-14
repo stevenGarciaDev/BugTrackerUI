@@ -1,8 +1,10 @@
 import React from 'react';
+import ManageRolesTable from '../../components/manage-roles-table';
 
 const ManageRoles = () => (
   <div>
-    ManageRoles
+    <h2>Manage Roles</h2>
+    <ManageRolesTable />
   </div>
 );
 
