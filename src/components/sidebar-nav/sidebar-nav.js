@@ -10,31 +10,34 @@ import {
   NavItem,
   OpenSidebarIcon,
   CloseSidebarIcon,
+  IconContainer,
 } from './sidebar-nav.styles';
 import { selectSidebarStatus } from '../../store/sidebar/sidebar.selector';
 import { openSidebar, closeSidebar } from '../../store/sidebar/sidebar.actions';
 
 const SidebarNav = ({ isSidebarOpen, openSidebarNav, closeSidebarNav }) => (
   <div>
-    {isSidebarOpen
-      ? (
-        <CloseSidebarIcon
-          fontSize="large"
-          onClick={() => closeSidebarNav()}
-        />
-      )
-      : (
-        <OpenSidebarIcon
-          fontSize="large"
-          onClick={() => openSidebarNav()}
-        />
-      )}
+    <IconContainer>
+      {isSidebarOpen
+        ? (
+          <CloseSidebarIcon
+            fontSize="large"
+            onClick={() => closeSidebarNav()}
+          />
+        )
+        : (
+          <OpenSidebarIcon
+            fontSize="large"
+            onClick={() => openSidebarNav()}
+          />
+        )}
+    </IconContainer>
     <Sidebar isVisible={isSidebarOpen}>
       <NavContainer>
         <NavSection>
           <NavSectionName>PROJECTS</NavSectionName>
           <NavItem to="/projects">View Projects</NavItem>
-          <NavItem to="/project/create">Create New Projects</NavItem>
+          <NavItem to="/project/create">Create New Project</NavItem>
         </NavSection>
         <NavSection>
           <NavSectionName>TICKETS</NavSectionName>

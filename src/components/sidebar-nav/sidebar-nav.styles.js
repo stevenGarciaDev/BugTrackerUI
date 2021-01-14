@@ -53,6 +53,12 @@ export const NavItem = styled(Link)`
     }
 `;
 
+export const IconContainer = styled.div`
+  position: fixed;
+  top: 10px;
+  z-index: 3;
+`;
+
 export const OpenSidebarIcon = styled(MenuIcon)`
   color: black;
   cursor: pointer;
