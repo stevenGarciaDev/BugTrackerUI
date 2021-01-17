@@ -42,17 +42,16 @@ export const CloseNavIcon = styled(CancelIcon)`
 `;
 
 export const NavList = styled.div`
-    display: none;
-
-    @media screen and (min-width: 900px) {
-        display: flex;
-        flex-direction: row;
-    }
+    display: flex;
+    flex-direction: row;
 `;
 
-export const NavTitle = styled.h1`
+export const NavTitleLink = styled(Link)`
+    color: white;
     font-size: 25px;
+    padding: 15px 0px;
     position: relative;
+    text-decoration: none;
     top: -5px;
 `;
 
