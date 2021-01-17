@@ -5,8 +5,10 @@ import { Normalize } from 'styled-normalize';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { selectSidebarStatus } from './store/sidebar/sidebar.selector';
+import { selectUserToken } from './store/user/user.selector';
 import theme from './theme';
 import GlobalStyle from './GlobalStyle';
+import LandingPageNavbar from './components/landing-page-navbar';
 import SidebarNav from './components/sidebar-nav';
 import UserTopNav from './components/user-top-nav';
 import LandingPage from './pages/landing-page';
@@ -33,38 +35,53 @@ const MainContent = styled.div`
   }
 `;
 
-function App({ isSidebarOpen }) {
+function App({ isSidebarOpen, userToken }) {
   return (
     <ThemeProvider theme={theme}>
       <Normalize />
       <GlobalStyle />
-      <UserTopNav />
-      <SidebarNav />
-      <MainContent isSidebarOpen={isSidebarOpen}>
-        <Switch>
-          <Route path="/project/create" component={CreateProject} />
-          <Route path="/ticket/create" component={CreateTicket} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/resetPassword" component={ResetPassword} />
-          <Route path="/tickets" component={Tickets} />
-          <Route path="/projects" component={Projects} />
-          <Route path="/manageRoles" component={ManageRoles} />
-          <Route path="/userProfile" component={UserProfile} />
-          <Route path="/" component={LandingPage} />
-        </Switch>
-      </MainContent>
+      {userToken !== ''
+        ? (
+          <>
+            <LandingPageNavbar />
+            <Switch>
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+              <Route path="/" component={LandingPage} />
+            </Switch>
+          </>
+        )
+        : (
+          <>
+            <UserTopNav />
+            <SidebarNav />
+            <MainContent isSidebarOpen={isSidebarOpen}>
+              <Switch>
+                <Route path="/project/create" component={CreateProject} />
+                <Route path="/ticket/create" component={CreateTicket} />
+                <Route path="/dashboard" component={Dashboard} />
+                <Route path="/resetPassword" component={ResetPassword} />
+                <Route path="/tickets" component={Tickets} />
+                <Route path="/projects" component={Projects} />
+                <Route path="/manageRoles" component={ManageRoles} />
+                <Route path="/userProfile" component={UserProfile} />
+                <Route path="/" component={Tickets} />
+              </Switch>
+            </MainContent>
+          </>
+        )}
     </ThemeProvider>
   );
 }
 
 const mapStateToProps = (state) => ({
   isSidebarOpen: selectSidebarStatus(state),
+  userToken: selectUserToken(state),
 });
 
 App.propTypes = {
   isSidebarOpen: PropTypes.bool.isRequired,
+  userToken: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps)(App);
