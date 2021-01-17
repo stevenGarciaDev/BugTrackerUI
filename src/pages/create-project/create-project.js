@@ -7,10 +7,15 @@ import {
 const CreateProject = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div>
       <h2>Create a New Project</h2>
-      <Form>
+      <Form onSubmit={(e) => handleSubmit(e)}>
         <InputContainer>
           <label htmlFor="name">Project Name</label>
           <Input
