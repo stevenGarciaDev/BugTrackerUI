@@ -6,7 +6,6 @@ import {
   NavList,
   NavTitle,
   NavItem,
-  NavButtonLink,
 } from './landing-page-navbar.styles';
 import SidebarNav from '../sidebar-nav';
 
@@ -34,7 +33,6 @@ const LandingPageNavbar = () => {
       <NavList>
         <NavItem to="/login">Login</NavItem>
         <NavItem to="/register">Register</NavItem>
-        <NavButtonLink as="a" href="#demo">DEMO</NavButtonLink>
       </NavList>
     </Nav>
   );
