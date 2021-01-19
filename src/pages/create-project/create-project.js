@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import {
   Form, InputContainer, Input, Textarea, Button,
 } from './create-project.styles';
+import PageHeadline from '../../styles/page-headline.style';
 
 const CreateProject = () => {
   const [name, setName] = useState('');
@@ -14,7 +15,7 @@ const CreateProject = () => {
 
   return (
     <div>
-      <h2>Create a New Project</h2>
+      <PageHeadline>Create a New Project</PageHeadline>
       <Form onSubmit={(e) => handleSubmit(e)}>
         <InputContainer>
           <label htmlFor="name">Project Name</label>

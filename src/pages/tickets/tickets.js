@@ -1,9 +1,10 @@
 import React from 'react';
 import TicketsTable from '../../components/tickets-table';
+import PageHeadline from '../../styles/page-headline.style';
 
 const Tickets = () => (
   <div>
-    <h2>View Tickets</h2>
+    <PageHeadline>View Tickets</PageHeadline>
     <TicketsTable />
   </div>
 );

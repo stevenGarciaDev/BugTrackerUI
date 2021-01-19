@@ -4,6 +4,7 @@ import {
   Form, InputContainer, Input, Textarea, Button,
 } from '../create-project/create-project.styles';
 import { Select } from './create-ticket.styles';
+import PageHeadline from '../../styles/page-headline.style';
 
 const CreateTicket = () => {
   const [ticketForm, setTicketForm] = useState({
@@ -40,7 +41,7 @@ const CreateTicket = () => {
   } = ticketForm;
   return (
     <div>
-      <h2>Create a New Ticket</h2>
+      <PageHeadline>Create a New Ticket</PageHeadline>
       <Form onSubmit={(e) => handleSubmit(e)}>
         <InputContainer>
           <label htmlFor="name">Title</label>

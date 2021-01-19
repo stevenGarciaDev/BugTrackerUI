@@ -1,9 +1,10 @@
 import React from 'react';
 import ProjectsTable from '../../components/projects-table';
+import PageHeadline from '../../styles/page-headline.style';
 
 const Projects = () => (
   <div>
-    <h2>View Projects</h2>
+    <PageHeadline>View Projects</PageHeadline>
     <ProjectsTable />
   </div>
 );
