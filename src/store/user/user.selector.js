@@ -6,10 +6,10 @@ export const selectUser = (state) => state.user;
 
 export const selectUserToken = createSelector(
   [selectUser],
-  (user) => user.token,
+  (user) => user.jwt,
 );
 
 export const selectCurrentUser = createSelector(
   [selectUserToken],
-  (token) => getCurrentUser(token),
+  (jwt) => getCurrentUser(jwt),
 );
