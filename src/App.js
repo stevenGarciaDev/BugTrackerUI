@@ -40,7 +40,7 @@ function App({ isSidebarOpen, userToken }) {
     <ThemeProvider theme={theme}>
       <Normalize />
       <GlobalStyle />
-      {userToken !== ''
+      {userToken === ''
         ? (
           <>
             <LandingPageNavbar />
