@@ -1,16 +1,21 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   Form, InputContainer, Input, Textarea, Button,
 } from './create-project.styles';
 import PageHeadline from '../../styles/page-headline.style';
+import { createProjectAsync } from '../../store/project/project.actions';
+import { selectUserToken, selectCurrentUserId } from '../../store/user/user.selector';
 
-const CreateProject = () => {
+const CreateProject = ({ createNewProject, jwt, userId }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    await createNewProject({ Name: name, Description: description, UserId: userId }, jwt);
   };
 
   return (
@@ -39,4 +44,19 @@ const CreateProject = () => {
   );
 };
 
-export default CreateProject;
+const mapStateToProps = (state) => ({
+  userId: selectCurrentUserId(state),
+  jwt: selectUserToken(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  createNewProject: (form, jwt) => dispatch(createProjectAsync(form, jwt)),
+});
+
+CreateProject.propTypes = {
+  userId: PropTypes.number.isRequired,
+  jwt: PropTypes.string.isRequired,
+  createNewProject: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProject);
