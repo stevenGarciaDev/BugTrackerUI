@@ -22,6 +22,7 @@ import Register from './pages/register';
 import ResetPassword from './pages/reset-password';
 import Tickets from './pages/tickets';
 import UserProfile from './pages/user-profile';
+import UserSettings from './pages/user-settings';
 import './App.css';
 
 const MainContent = styled.div`
@@ -65,6 +66,7 @@ function App({ isSidebarOpen, userToken }) {
                 <Route path="/projects" component={Projects} />
                 <Route path="/manageRoles" component={ManageRoles} />
                 <Route path="/userProfile" component={UserProfile} />
+                <Route path="/userSettings" component={UserSettings} />
                 <Route path="/" component={Tickets} />
               </Switch>
             </MainContent>
