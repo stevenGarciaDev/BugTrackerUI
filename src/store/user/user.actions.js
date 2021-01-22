@@ -1,21 +1,36 @@
 import { UserActionTypes } from './user.types';
+import { registerUser, loginUser } from '../../services/authService';
 
-export const LOGIN = (formData) => ({
-  type: UserActionTypes.LOGIN,
-  formData,
-});
-
-export const REGISTER = (formData) => ({
-  type: UserActionTypes.REGISTER,
-  formData,
-});
-
-export const AUTHENTICATE_SUCCESS = (jwt) => ({
+export const authenticateSuccess = (userDataTransferObject) => ({
   type: UserActionTypes.AUTHENTICATE_SUCCESS,
-  jwt,
+  payload: {
+    ...userDataTransferObject,
+  },
 });
 
-export const AUTHENTICATE_FAIL = (errorMessage) => ({
+export const authenticateFailure = (errorMessage) => ({
   type: UserActionTypes.AUTHENTICATE_FAIL,
   errorMessage,
 });
+
+export const signOut = () => ({
+  type: UserActionTypes.SIGN_OUT,
+});
+
+export const register = (registerForm) => async (dispatch) => {
+  try {
+    const response = await registerUser(registerForm);
+    dispatch(authenticateSuccess(response.data));
+  } catch (error) {
+    dispatch(authenticateFailure(error.message));
+  }
+};
+
+export const login = (loginForm) => async (dispatch) => {
+  try {
+    const response = await loginUser(loginForm);
+    dispatch(authenticateSuccess(response.data));
+  } catch (error) {
+    dispatch(authenticateFailure(error.message));
+  }
+};
