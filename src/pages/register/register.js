@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -12,11 +12,14 @@ import {
   Label,
   Input,
   ButtonContainer,
+  ErrorMessage,
 } from '../login/login.styles';
 import { Select } from '../create-ticket/create-ticket.styles';
-import { register } from '../../store/user/user.actions';
+import { selectUserError } from '../../store/user/user.selector';
+import { register, setErrorMessage } from '../../store/user/user.actions';
+import areAllFieldsFilledOut from '../../helpers/areAllFieldsFilledOut';
 
-const Register = ({ performRegistration }) => {
+const Register = ({ performRegistration, setError, formError }) => {
   const [registerForm, setRegisterForm] = useState({
     UserName: '',
     Email: '',
@@ -26,7 +29,17 @@ const Register = ({ performRegistration }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await performRegistration(registerForm);
+
+    if (!areAllFieldsFilledOut(registerForm)) {
+      setError('Not all form fields are filled out.');
+    }
+
+    const minPasswordLength = 6;
+    if (registerForm.Password.length >= minPasswordLength) {
+      await performRegistration(registerForm);
+    } else {
+      setError('Password must be 6 characters or more');
+    }
   };
 
   const handleChange = (event) => {
@@ -38,6 +51,11 @@ const Register = ({ performRegistration }) => {
     });
   };
 
+  useEffect(() => {
+    setError('');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const {
     UserName,
     Email,
@@ -48,6 +66,7 @@ const Register = ({ performRegistration }) => {
     <Container>
       <Form onSubmit={(e) => handleSubmit(e)}>
         <Title>Create an account</Title>
+        {formError && <ErrorMessage>{formError}</ErrorMessage>}
         <InputControl>
           <Label>Username</Label>
           <Input type="text" value={UserName} name="UserName" onChange={(e) => handleChange(e)} />
@@ -75,12 +94,23 @@ const Register = ({ performRegistration }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  performRegistration: (registerForm) => dispatch(register(registerForm)),
+const mapStateToProps = (state) => ({
+  formError: selectUserError(state),
 });
 
-Register.propTypes = {
-  performRegistration: PropTypes.func.isRequired,
+const mapDispatchToProps = (dispatch) => ({
+  performRegistration: (registerForm) => dispatch(register(registerForm)),
+  setError: (message) => dispatch(setErrorMessage(message)),
+});
+
+Register.defaultProps = {
+  formError: '',
 };
 
-export default connect(null, mapDispatchToProps)(Register);
+Register.propTypes = {
+  formError: PropTypes.string,
+  performRegistration: PropTypes.func.isRequired,
+  setError: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
