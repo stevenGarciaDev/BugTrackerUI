@@ -44,10 +44,6 @@ const SidebarNav = ({ isSidebarOpen, openSidebarNav, closeSidebarNav }) => (
           <NavItem to="/tickets">View Tickets</NavItem>
           <NavItem to="/ticket/create">Create New Ticket</NavItem>
         </NavSection>
-        <NavSection>
-          <NavSectionName>MANAGE</NavSectionName>
-          <NavItem to="/manageRoles">User Roles</NavItem>
-        </NavSection>
       </NavContainer>
     </Sidebar>
   </div>
