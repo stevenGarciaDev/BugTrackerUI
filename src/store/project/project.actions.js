@@ -8,8 +8,8 @@ export const createProjectSuccess = (project) => ({
   },
 });
 
-export const createProjectFailure = (errorMessage) => ({
-  type: ProjectActionTypes.CREATE_PROJECT_FAILURE,
+export const setErrorMessage = (errorMessage) => ({
+  type: ProjectActionTypes.SET_ERROR_MESSAGE,
   payload: {
     errorMessage,
   },
@@ -20,6 +20,6 @@ export const createProjectAsync = (projectForm, jwt) => async (dispatch) => {
     const response = await createProject(projectForm, jwt);
     dispatch(createProjectSuccess(response));
   } catch (error) {
-    dispatch(createProjectFailure(error.message));
+    dispatch(setErrorMessage(error.message));
   }
 };

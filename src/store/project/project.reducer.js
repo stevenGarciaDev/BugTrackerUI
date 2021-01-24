@@ -2,7 +2,7 @@ import { ProjectActionTypes } from './project.types';
 
 const INITIAL_STATE = {
   projects: [],
-  errorMessage: '',
+  projectErrorMessage: '',
 };
 
 const ProjectReducer = (state = INITIAL_STATE, action) => {
@@ -11,12 +11,12 @@ const ProjectReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         projects: [action.payload.project, ...state.projects],
-        errorMessage: '',
+        projectErrorMessage: '',
       };
-    case ProjectActionTypes.CREATE_PROJECT_FAILURE:
+    case ProjectActionTypes.SET_PROJECT_ERROR_MESSAGE:
       return {
         ...state,
-        errorMessage: action.payload.errorMessage,
+        projectErrorMessage: action.payload.errorMessage,
       };
     default:
       return state;
