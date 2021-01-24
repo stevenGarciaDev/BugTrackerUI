@@ -8,20 +8,56 @@ import {
 import PageHeadline from '../../styles/page-headline.style';
 import { createProjectAsync } from '../../store/project/project.actions';
 import { selectUserToken, selectCurrentUserId } from '../../store/user/user.selector';
+import ProjectMemberInput from '../../components/add-project-member-input';
+import { ErrorMessage } from '../login/login.styles';
 
 const CreateProject = ({ createNewProject, jwt, userId }) => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  const [projectForm, setProjectForm] = useState({
+    name: '',
+    description: '',
+    members: [],
+  });
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createNewProject({ Name: name, Description: description, UserId: userId }, jwt);
+    await createNewProject({ ...projectForm, UserId: userId }, jwt);
   };
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setProjectForm({
+      ...projectForm,
+      [name]: value,
+    });
+  };
+
+  const addMember = (member) => {
+    const projectMembers = [member, ...projectForm.members];
+
+    setProjectForm({
+      ...projectForm,
+      members: projectMembers,
+    });
+  };
+
+  const removeMember = (userName) => {
+    const projectMembers = projectForm.members
+      .filter((m) => m.userName.toLowerCase() !== userName.toLowerCase());
+
+    setProjectForm({
+      ...projectForm,
+      members: projectMembers,
+    });
+  };
+
+  const { name, description, members } = projectForm;
   return (
     <div>
       <PageHeadline>Create a New Project</PageHeadline>
       <Form onSubmit={(e) => handleSubmit(e)}>
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         <InputContainer>
           <label htmlFor="name">Project Name</label>
           <Input
@@ -29,13 +65,28 @@ const CreateProject = ({ createNewProject, jwt, userId }) => {
             id="name"
             name="name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => handleChange(e)}
           />
         </InputContainer>
 
         <InputContainer>
           <label htmlFor="description">Short Description</label>
-          <Textarea type="text" id="description" name="description" value={description} onChange={(e) => setDescription(e.target.value)} />
+          <Textarea
+            type="text"
+            id="description"
+            name="description"
+            value={description}
+            onChange={(e) => handleChange(e)}
+          />
+        </InputContainer>
+
+        <InputContainer>
+          <ProjectMemberInput
+            members={members}
+            addMember={addMember}
+            removeMember={removeMember}
+            setErrorMessage={setErrorMessage}
+          />
         </InputContainer>
 
         <Button type="submit">Create Project</Button>
