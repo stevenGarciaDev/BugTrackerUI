@@ -8,7 +8,6 @@ const INITIAL_STATE = {
   permissions: '',
   userName: '',
   email: '',
-  id: '',
 };
 
 const UserReducer = (state = INITIAL_STATE, action) => {
@@ -27,6 +26,11 @@ const UserReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         token: '',
+      };
+    case UserActionTypes.SET_ERROR_MESSAGE:
+      return {
+        ...state,
+        errorMessage: action.errorMessage,
       };
     default:
       return state;

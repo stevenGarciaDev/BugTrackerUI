@@ -17,12 +17,17 @@ export const signOut = () => ({
   type: UserActionTypes.SIGN_OUT,
 });
 
+export const setErrorMessage = (message) => ({
+  type: UserActionTypes.SET_ERROR_MESSAGE,
+  errorMessage: message,
+});
+
 export const register = (registerForm) => async (dispatch) => {
   try {
     const response = await registerUser(registerForm);
     dispatch(authenticateSuccess(response.data));
   } catch (error) {
-    dispatch(authenticateFailure(error.message));
+    dispatch(authenticateFailure(error.response.data));
   }
 };
 
@@ -31,6 +36,6 @@ export const login = (loginForm) => async (dispatch) => {
     const response = await loginUser(loginForm);
     dispatch(authenticateSuccess(response.data));
   } catch (error) {
-    dispatch(authenticateFailure(error.message));
+    dispatch(authenticateFailure(error.response.data));
   }
 };

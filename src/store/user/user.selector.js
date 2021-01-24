@@ -23,3 +23,8 @@ export const selectUserName = createSelector(
   [selectUser],
   (user) => user.userName,
 );
+
+export const selectUserError = createSelector(
+  [selectUser],
+  (user) => user.errorMessage,
+);
