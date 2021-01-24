@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -12,10 +12,13 @@ import {
   Label,
   Input,
   ButtonContainer,
+  ErrorMessage,
 } from './login.styles';
-import { login } from '../../store/user/user.actions';
+import { login, setErrorMessage } from '../../store/user/user.actions';
+import { selectUserError } from '../../store/user/user.selector';
+import areAllFieldsFilledOut from '../../helpers/areAllFieldsFilledOut';
 
-const Login = ({ performLogin }) => {
+const Login = ({ performLogin, setError, formError }) => {
   const [loginForm, setLoginForm] = useState({
     Email: '',
     Password: '',
@@ -23,7 +26,11 @@ const Login = ({ performLogin }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await performLogin(loginForm);
+    if (areAllFieldsFilledOut(loginForm)) {
+      await performLogin(loginForm);
+    } else {
+      setError('Not all form fields are filled out.');
+    }
   };
 
   const handleChange = (event) => {
@@ -35,11 +42,17 @@ const Login = ({ performLogin }) => {
     });
   };
 
+  useEffect(() => {
+    setError('');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const { Email, Password } = loginForm;
   return (
     <Container>
       <Form onSubmit={(e) => handleSubmit(e)}>
         <Title>Welcome back</Title>
+        {formError && <ErrorMessage>{formError}</ErrorMessage>}
         <InputControl>
           <Label>Email</Label>
           <Input type="text" name="Email" value={Email} onChange={(e) => handleChange(e)} />
@@ -56,12 +69,23 @@ const Login = ({ performLogin }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  performLogin: (loginForm) => dispatch(login(loginForm)),
+const mapStateToProps = (state) => ({
+  formError: selectUserError(state),
 });
 
-Login.propTypes = {
-  performLogin: PropTypes.func.isRequired,
+const mapDispatchToProps = (dispatch) => ({
+  performLogin: (loginForm) => dispatch(login(loginForm)),
+  setError: (message) => dispatch(setErrorMessage(message)),
+});
+
+Login.defaultProps = {
+  formError: '',
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+Login.propTypes = {
+  formError: PropTypes.string,
+  performLogin: PropTypes.func.isRequired,
+  setError: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

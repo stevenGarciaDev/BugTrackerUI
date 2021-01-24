@@ -21,6 +21,13 @@ export const Title = styled.h2`
   text-align: center;
 `;
 
+export const ErrorMessage = styled.h2`
+  color: red;
+  font-size: 18px;
+  font-style: italic;
+  text-align: center;
+`;
+
 export const InputControl = styled.div`
   display: flex;
   flex-direction: column;
