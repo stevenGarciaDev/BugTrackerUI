@@ -18,7 +18,10 @@ const ProjectMemberInput = ({
   const [memberName, setMemberName] = useState('');
 
   const handleAddingNewMember = async () => {
-    if (memberName === '') return;
+    if (memberName === '') {
+      setErrorMessage('You must specify a name for the member to add.');
+      return;
+    }
     if (memberName.toLowerCase() === userName.toLowerCase()) {
       setErrorMessage('You are already added to the project.');
       return;
