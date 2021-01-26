@@ -8,9 +8,13 @@ export const getAllProjects = async (jwt) => {
   return projects.data;
 };
 
-export const getProjects = async (userId, jwt) => {
-  const projects = await http.get(`${apiEndpoint}/${userId}`,
-    { headers: { 'x-auth-token': jwt } });
+export const getUserProjects = async (userId, jwt) => {
+  const projects = await http.get(`${apiEndpoint}/user/${userId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
   return projects.data;
 };
 
@@ -22,7 +26,7 @@ export const createProject = async (projectForm, jwt) => {
         Authorization: `Bearer ${jwt}`,
       },
     });
-  return newProject.data[0];
+  return newProject.data;
 };
 
 export const deleteProject = async (projectId, jwt) => {
