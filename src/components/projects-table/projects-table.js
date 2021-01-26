@@ -1,35 +1,40 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Container, Table, TableHeadData, TableRow, TableData, Column, Button,
 } from '../tickets-table/tickets-table.styles';
 
-const ProjectsTable = () => (
+const ProjectsTable = ({ projects }) => (
   <Container>
     <Table>
       <colgroup>
         <Column width={350} />
         <Column width={150} />
-        <Column width={150} />
-        <Column width={150} />
       </colgroup>
       <thead>
         <TableRow>
           <TableHeadData>Name</TableHeadData>
-          <TableHeadData># of Members</TableHeadData>
-          <TableHeadData># of Open Tickets</TableHeadData>
           <TableHeadData>More</TableHeadData>
         </TableRow>
       </thead>
       <tbody>
-        <TableRow>
-          <TableData>Title</TableData>
-          <TableData>Priority</TableData>
-          <TableData>Assigned To</TableData>
-          <TableData><Button to="/">View</Button></TableData>
-        </TableRow>
+        {projects.length > 0
+        && projects.map((p) => (
+          <TableRow key={p.id}>
+            <TableData>{p.name}</TableData>
+            <TableData><Button to="/">View</Button></TableData>
+          </TableRow>
+        ))}
       </tbody>
     </Table>
   </Container>
 );
+
+ProjectsTable.propTypes = {
+  projects: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  })).isRequired,
+};
 
 export default ProjectsTable;
