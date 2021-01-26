@@ -38,3 +38,10 @@ export const Button = styled.button`
   margin-top: 10px;
   width: 150px;
 `;
+
+export const SuccessMessage = styled.h2`
+  color: green;
+  font-size: 18px;
+  font-style: italic;
+  text-align: center;
+`;
