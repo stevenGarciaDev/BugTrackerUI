@@ -1,24 +1,39 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
-  Form, InputContainer, Input, Textarea, Button,
+  Form, InputContainer, Input, Textarea, Button, SuccessMessage,
 } from '../create-project/create-project.styles';
 import { Select } from './create-ticket.styles';
 import PageHeadline from '../../styles/page-headline.style';
+import { ErrorMessage } from '../login/login.styles';
+import { getProjects } from '../../store/project/project.actions';
+import { selectUserToken, selectCurrentUserId } from '../../store/user/user.selector';
+import { selectUserProjects } from '../../store/project/project.selector';
+import { setTicketErrorMessage, setTicketSuccessMessage, createNewTicket } from '../../store/ticket/ticket.actions';
+import { getTicketErrorMessage, getTicketSuccessMessage } from '../../store/ticket/ticket.selector';
+import areAllFieldsFilledOut from '../../helpers/areAllFieldsFilledOut';
 
-const CreateTicket = () => {
+const CreateTicket = ({
+  initializeProjects, userProjects, userId, jwt, setError, errorMessage,
+  createProjectTicket, successMessage, setSuccessMessage,
+}) => {
   const [ticketForm, setTicketForm] = useState({
-    name: '',
+    title: '',
     description: '',
-    projectTitle: '',
-    ticketType: '',
-    ticketPriority: '',
-    ticketStatus: '',
-    assignedDeveloper: '',
+    projectName: '',
+    type: '',
+    priority: '',
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (areAllFieldsFilledOut(ticketForm)) {
+      await createProjectTicket(ticketForm, userId, jwt);
+    } else {
+      setError('Please fill out all the required forms.');
+    }
   };
 
   const handleChange = (event) => {
@@ -30,85 +45,124 @@ const CreateTicket = () => {
     });
   };
 
+  useEffect(() => {
+    initializeProjects(userId, jwt);
+    setError('');
+    setSuccessMessage('');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const {
-    name,
+    title,
     description,
-    projectTitle,
-    ticketType,
-    ticketPriority,
-    ticketStatus,
-    assignedDeveloper,
+    projectName,
+    type,
+    priority,
   } = ticketForm;
   return (
     <div>
-      <PageHeadline>Create a New Ticket</PageHeadline>
-      <Form onSubmit={(e) => handleSubmit(e)}>
-        <InputContainer>
-          <label htmlFor="name">Title</label>
-          <Input
-            type="text"
-            id="name"
-            name="name"
-            value={name}
-            onChange={(e) => handleChange(e)}
-          />
-        </InputContainer>
+      {userProjects.length === 0
+        ? <PageHeadline>You must create a project before making a ticket.</PageHeadline>
+        : (
+          <>
+            <PageHeadline>Create a New Ticket</PageHeadline>
+            {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            {!successMessage
+            && (
+            <Form onSubmit={(e) => handleSubmit(e)}>
+              <InputContainer>
+                <label htmlFor="title">Title</label>
+                <Input
+                  type="text"
+                  id="title"
+                  name="title"
+                  value={title}
+                  onChange={(e) => handleChange(e)}
+                />
+              </InputContainer>
 
-        <InputContainer>
-          <label htmlFor="description">Description</label>
-          <Textarea type="text" id="description" name="description" value={description} onChange={(e) => handleChange(e)} />
-        </InputContainer>
+              <InputContainer>
+                <label htmlFor="description">Description</label>
+                <Textarea type="text" id="description" name="description" value={description} onChange={(e) => handleChange(e)} />
+              </InputContainer>
 
-        <InputContainer>
-          <label htmlFor="projectTitle">Project</label>
-          <Select type="text" id="projectTitle" name="projectTitle" value={projectTitle} onChange={(e) => handleChange(e)}>
-            <option value="Project 1">1</option>
-            <option value="Project 1">2</option>
-          </Select>
-        </InputContainer>
+              <InputContainer>
+                <label htmlFor="projectName">Project</label>
+                <Select
+                  id="projectName"
+                  name="projectName"
+                  value={projectName}
+                  onChange={(e) => handleChange(e)}
+                >
+                  <option disabled>{' '}</option>
+                  {userProjects.length > 0
+                  && userProjects.map((p) => (
+                    <option key={p.id} value={p.name}>{p.name}</option>
+                  ))}
+                </Select>
+              </InputContainer>
 
-        <InputContainer>
-          <label htmlFor="ticketType">Ticket Type</label>
-          <Select type="text" id="ticketType" name="ticketType" value={ticketType} onChange={(e) => handleChange(e)}>
-            <option value="UI">UI</option>
-            <option value="Backend">Backend</option>
-            <option value="Devops">Devops</option>
-          </Select>
-        </InputContainer>
+              <InputContainer>
+                <label htmlFor="type">Ticket Type</label>
+                <Select id="type" name="type" value={type} onChange={(e) => handleChange(e)}>
+                  <option disabled>{' '}</option>
+                  <option value="UI">UI</option>
+                  <option value="Backend">Backend</option>
+                  <option value="Devops">Devops</option>
+                </Select>
+              </InputContainer>
 
-        <InputContainer>
-          <label htmlFor="ticketPriority">Ticket Priority</label>
-          <Select type="text" id="ticketPriority" name="ticketPriority" value={ticketPriority} onChange={(e) => handleChange(e)}>
-            <option value="Pending">Pending</option>
-            <option value="Low">Low</option>
-            <option value="Moderate">Moderate</option>
-            <option value="High">High</option>
-            <option value="Urgent">Urgent</option>
-          </Select>
-        </InputContainer>
+              <InputContainer>
+                <label htmlFor="priority">Ticket Priority</label>
+                <Select id="priority" name="priority" value={priority} onChange={(e) => handleChange(e)}>
+                  <option disabled>{' '}</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Low">Low</option>
+                  <option value="Moderate">Moderate</option>
+                  <option value="High">High</option>
+                  <option value="Urgent">Urgent</option>
+                </Select>
+              </InputContainer>
 
-        <InputContainer>
-          <label htmlFor="description">Ticket Status</label>
-          <Select type="text" id="description" name="ticketStatus" value={ticketStatus} onChange={(e) => handleChange(e)}>
-            <option value="New">New</option>
-            <option value="Reviewed">Reviewed</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Resolved">Resolved</option>
-          </Select>
-        </InputContainer>
-
-        <InputContainer>
-          <label htmlFor="assignedDeveloper">Assigned Developer</label>
-          <Select type="text" id="assignedDeveloper" name="assignedDeveloper" value={assignedDeveloper} onChange={(e) => handleChange(e)}>
-            <option value="Project 1">Pam</option>
-            <option value="Project 1">Jim</option>
-          </Select>
-        </InputContainer>
-
-        <Button type="submit">Create Ticket</Button>
-      </Form>
+              <Button type="submit">Create Ticket</Button>
+            </Form>
+            )}
+          </>
+        )}
     </div>
   );
 };
 
-export default CreateTicket;
+const mapStateToProps = (state) => ({
+  userProjects: selectUserProjects(state),
+  userId: selectCurrentUserId(state),
+  jwt: selectUserToken(state),
+  errorMessage: getTicketErrorMessage(state),
+  successMessage: getTicketSuccessMessage(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  initializeProjects: (userId, jwt) => dispatch(getProjects(userId, jwt)),
+  setError: (message) => dispatch(setTicketErrorMessage(message)),
+  setSuccessMessage: (message) => dispatch(setTicketSuccessMessage(message)),
+  createProjectTicket: (ticketForm, userId, jwt) => (
+    dispatch(createNewTicket(ticketForm, userId, jwt))
+  ),
+});
+
+CreateTicket.propTypes = {
+  initializeProjects: PropTypes.func.isRequired,
+  createProjectTicket: PropTypes.func.isRequired,
+  setError: PropTypes.func.isRequired,
+  setSuccessMessage: PropTypes.func.isRequired,
+  userProjects: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+  })).isRequired,
+  userId: PropTypes.number.isRequired,
+  jwt: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string.isRequired,
+  successMessage: PropTypes.string.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTicket);
