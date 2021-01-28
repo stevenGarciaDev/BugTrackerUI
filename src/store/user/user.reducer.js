@@ -22,11 +22,6 @@ const UserReducer = (state = INITIAL_STATE, action) => {
         ...state,
         errorMessage: action.errorMessage,
       };
-    case UserActionTypes.SIGN_OUT:
-      return {
-        ...state,
-        token: '',
-      };
     case UserActionTypes.SET_ERROR_MESSAGE:
       return {
         ...state,

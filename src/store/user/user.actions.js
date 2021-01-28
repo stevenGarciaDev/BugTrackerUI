@@ -14,7 +14,7 @@ export const authenticateFailure = (errorMessage) => ({
 });
 
 export const signOut = () => ({
-  type: UserActionTypes.SIGN_OUT,
+  type: UserActionTypes.USER_LOGOUT,
 });
 
 export const setErrorMessage = (message) => ({
