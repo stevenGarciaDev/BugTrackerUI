@@ -17,8 +17,14 @@ const Projects = ({
 
   return (
     <div>
-      <PageHeadline>View Projects</PageHeadline>
-      <ProjectsTable projects={userProjects} />
+      {userProjects.length === 0
+        ? <PageHeadline>You do not have any projects yet.</PageHeadline>
+        : (
+          <>
+            <PageHeadline>View Your Projects</PageHeadline>
+            <ProjectsTable projects={userProjects} />
+          </>
+        )}
     </div>
   );
 };
