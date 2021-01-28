@@ -1,0 +1,6 @@
+/* eslint-disable import/prefer-default-export */
+export const TicketActionTypes = {
+  SET_TICKET_ERROR_MESSAGE: 'SET_TICKET_ERROR_MESSAGE',
+  SET_TICKET_SUCCESS_MESSAGE: 'SET_TICKET_SUCCESS_MESSAGE',
+  CREATE_TICKET_SUCCESS: 'CREATE_TICKET_SUCCESS',
+};
