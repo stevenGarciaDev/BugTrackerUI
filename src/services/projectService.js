@@ -8,6 +8,20 @@ export const getAllProjects = async (jwt) => {
   return projects.data;
 };
 
+export const getMembersForProject = async (projectId, jwt) => {
+  try {
+    const members = await http.get(`${apiEndpoint}/members/${projectId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+    return members.data;
+  } catch (err) {
+    return [];
+  }
+};
+
 export const getUserProjects = async (userId, jwt) => {
   const projects = await http.get(`${apiEndpoint}/user/${userId}`,
     {
