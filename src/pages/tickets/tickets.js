@@ -4,7 +4,7 @@ import PageHeadline from '../../styles/page-headline.style';
 
 const Tickets = () => (
   <div>
-    <PageHeadline>View Tickets</PageHeadline>
+    <PageHeadline>View Your Assigned Tickets</PageHeadline>
     <TicketsTable />
   </div>
 );
