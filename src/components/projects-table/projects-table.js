@@ -22,7 +22,7 @@ const ProjectsTable = ({ projects }) => (
         && projects.map((p) => (
           <TableRow key={p.id}>
             <TableData>{p.name}</TableData>
-            <TableData><Button to="/">View</Button></TableData>
+            <TableData><Button to={`/viewproject/${p.id}`}>View</Button></TableData>
           </TableRow>
         ))}
       </tbody>
