@@ -23,6 +23,8 @@ import ResetPassword from './pages/reset-password';
 import Tickets from './pages/tickets';
 import UserProfile from './pages/user-profile';
 import UserSettings from './pages/user-settings';
+import ViewProject from './pages/view-project';
+import ViewTicket from './pages/view-ticket';
 import './App.css';
 
 const MainContent = styled.div`
@@ -67,6 +69,8 @@ function App({ isSidebarOpen, userToken }) {
                 <Route path="/manageRoles" component={ManageRoles} />
                 <Route path="/userProfile" component={UserProfile} />
                 <Route path="/userSettings" component={UserSettings} />
+                <Route path="/viewproject/:id" component={ViewProject} />
+                <Route path="/project/:projectId/ticket/:ticketId" component={ViewTicket} />
                 <Route path="/" component={Tickets} />
               </Switch>
             </MainContent>
