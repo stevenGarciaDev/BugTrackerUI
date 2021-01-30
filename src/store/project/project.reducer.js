@@ -24,6 +24,7 @@ const ProjectReducer = (state = INITIAL_STATE, action) => {
     case ProjectActionTypes.SET_PROJECT_SUCCESS_MESSAGE:
       return {
         ...state,
+        projectErrorMessage: '',
         successMessage: action.payload.successMessage,
       };
     case ProjectActionTypes.INITIALIZE_PROJECTS:
