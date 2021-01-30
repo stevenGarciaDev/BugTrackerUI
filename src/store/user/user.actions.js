@@ -27,7 +27,7 @@ export const register = (registerForm) => async (dispatch) => {
     const response = await registerUser(registerForm);
     dispatch(authenticateSuccess(response.data));
   } catch (error) {
-    dispatch(authenticateFailure(error.response.data));
+    dispatch(authenticateFailure(error.message));
   }
 };
 
@@ -36,6 +36,6 @@ export const login = (loginForm) => async (dispatch) => {
     const response = await loginUser(loginForm);
     dispatch(authenticateSuccess(response.data));
   } catch (error) {
-    dispatch(authenticateFailure(error.response.data));
+    dispatch(authenticateFailure(error.message));
   }
 };
