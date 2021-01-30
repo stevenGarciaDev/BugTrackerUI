@@ -2,7 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 export default function (formFields) {
   for (const field in formFields) {
-    if (formFields[field].trim() === '') {
+    if (formFields[field] === '') {
       return false;
     }
   }
