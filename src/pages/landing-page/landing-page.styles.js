@@ -88,11 +88,13 @@ export const DemoSection = styled.section`
 `;
 
 export const DemoUsersContainer = styled.div`
+    align-items: center;
     display: flex;
     flex-direction: column;
 
     @media screen and (min-width: 1000px) {
         flex-direction: row;
+        justify-content: center;
         margin-top: 40px;
     }
 `;
@@ -105,6 +107,7 @@ export const UserTypeContainer = styled.div`
     padding: 10px;
     position: relative;
     text-align: center;
+    max-width: 400px;
 
     @media screen and (min-width: 1000px) {
         padding-top: 80px;
