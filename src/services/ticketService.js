@@ -8,22 +8,46 @@ export const getAllTickets = async (jwt) => {
   return tickets.data;
 };
 
-export const getAllTicketsForUser = async (jwt) => {
-  const tickets = await http.get(`${apiEndpoint}/user`,
-    { headers: { 'x-auth-token': jwt } });
-  return tickets.data;
+export const getAllTicketsForUser = async (userId, jwt) => {
+  try {
+    const tickets = await http.get(`${apiEndpoint}/user/${userId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+    return tickets.data;
+  } catch (error) {
+    return error.message;
+  }
 };
 
 export const getTicket = async (ticketId, jwt) => {
-  const ticket = await http.get(`${apiEndpoint}/${ticketId}`,
-    { headers: { 'x-auth-token': jwt } });
-  return ticket.data;
+  try {
+    const ticket = await http.get(`${apiEndpoint}/${ticketId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+    return ticket.data;
+  } catch (error) {
+    return error.message;
+  }
 };
 
 export const getTicketsForProject = async (projectId, jwt) => {
-  const tickets = await http.get(`${apiEndpoint}/project/${projectId}`,
-    { headers: { 'x-auth-token': jwt } });
-  return tickets.data;
+  try {
+    const tickets = await http.get(`${apiEndpoint}/project/${projectId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+    return tickets.data;
+  } catch (error) {
+    return error.message;
+  }
 };
 
 export const createTicket = async (ticketForm, createdByUserId, jwt) => {
@@ -38,10 +62,18 @@ export const createTicket = async (ticketForm, createdByUserId, jwt) => {
 };
 
 export const updateTicket = async (ticketForm, ticketId, jwt) => {
-  const updatedTicket = await http.put(`${apiEndpoint}/${ticketId}`,
-    { ticketForm },
-    { headers: { 'x-auth-token': jwt } });
-  return updatedTicket.data;
+  try {
+    const updatedTicket = await http.put(`${apiEndpoint}/${ticketId}`,
+      { ...ticketForm },
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+    return updatedTicket.data;
+  } catch (error) {
+    return error.message;
+  }
 };
 
 export const deleteTicket = async (ticketId, jwt) => {
