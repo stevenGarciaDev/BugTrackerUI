@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import UserDropdown from '../user-dropdown';
-import { Container, ImageIcon } from './user-top-nav-icon.styles';
+import { Container, Name } from './user-top-nav-icon.styles';
 import { selectUserName } from '../../store/user/user.selector';
 
 const UserTopNavIcon = ({ userName }) => {
@@ -20,8 +20,7 @@ const UserTopNavIcon = ({ userName }) => {
 
   return (
     <Container onClick={() => setDropdownStatus(!isDisplayingDropdown)}>
-      <ImageIcon />
-      {determineUsernameToDisplay(userName)}
+      <Name>{determineUsernameToDisplay(userName)}</Name>
       { isDisplayingDropdown && <UserDropdown /> }
     </Container>
   );

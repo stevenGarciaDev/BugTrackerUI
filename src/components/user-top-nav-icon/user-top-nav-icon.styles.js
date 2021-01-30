@@ -23,3 +23,8 @@ export const ImageIcon = styled.div`
   margin-right: 5px;
   width: 30px;
 `;
+
+export const Name = styled.p`
+  position: relative;
+  left: 10px;
+`;
