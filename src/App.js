@@ -27,6 +27,9 @@ import ViewProject from './pages/view-project';
 import ViewTicket from './pages/view-ticket';
 import './App.css';
 
+// eslint-disable-next-line no-console
+console.log('ENV', process.env);
+
 const MainContent = styled.div`
   float: right;
   margin-top: 30px;
