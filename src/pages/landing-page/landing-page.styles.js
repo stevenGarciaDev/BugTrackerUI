@@ -144,7 +144,16 @@ export const DemoButtonContainer = styled.div`
     }
 `;
 
-export const UserButtonLink = styled(ButtonLink)`
+export const UserButtonDemoLogin = styled.button`
+    background-color: ${(props) => props.theme.colors.lightBlue};
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
     display: block;
     margin: 10px auto;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    width: 120px;
 `;
