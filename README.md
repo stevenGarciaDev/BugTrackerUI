@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# BugTracks Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a portfolio application used to showcase my skill in React and Redux.
 
-## Available Scripts
+BugTracks allows users to create an account, create projects, and create tickets for managing
+their project tasks.
 
-In the project directory, you can run:
+The deployed application can be found at the following URL, [https://bugtracks.azurewebsites.net/](https://bugtracks.azurewebsites.net/).
 
-### `yarn start`
+The application has been deployed to Azure and setup to use CI/CD with Azure Pipelines.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The GitHub for the API can be found at the following [link](https://github.com/stevenGarciaDev/BugTrackerAPI) which was developed using C#, ASP.NET Core 3.1, Entity Framework Core, and SQL Server.
+## Description of App Features
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The features implemented accomplish the goals of making the Minimum Viable Product of a Bug Tracking app.
 
-### `yarn test`
+![Landing Page](./docs/landingPage_bugTracks.png "Landing Page")
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You can sign in as a demo user so that you can quickly navigate the site and view its features.
 
-### `yarn build`
+Once you are successfully authenticated with a JSON Web Token, you have the pages for viewing projects,
+creating a new project, viewing tickets, or creating a new ticket.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Create a Project](./docs/createProject_bugTracks.png "Create Project Page")
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+You are also able to view a project's details as well as view and update a ticket's details.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Edit a Ticket](./docs/editTicket_bugTracks.png "Edit a Ticket")
 
-### `yarn eject`
+## Skills Learned
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The skills I demonstrate in this project include the following.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* Utilize Redux as single source of truth to reduce prop drilling
+* Implement styled components for organized and reusable CSS styles
+* Develop asynchronous JavaScript to make request to a Web API
+* Created controlled components for login, register, create ticket, and create project pages
+* Implement action creators, actions, reducers, and selectors for interacting with Redux Store
+* Use React Router to implement a Single Page Application
+* Deploy to Azure and setup CI/CD with Azure Pipelines through the Classic Editor
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Structure of Code
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+For the pages, I organized the corresponding React Components to be in the pages directory. Here is my implementation for the Create Ticket page component. [Here](https://github.com/stevenGarciaDev/BugTrackerUI/blob/master/src/pages/create-ticket/create-ticket.js)
 
-## Learn More
+For components that are to be used as a child within a parent page component, I organized them to be in the components directory.
+Here is an example of a component I implemented. [Here](https://github.com/stevenGarciaDev/BugTrackerUI/blob/master/src/components/add-project-member-input/add-project-member-input.js)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The asynchronous service calls have been organized to be in the services directory as to decouple it from the component logic.
+Here is an example for the project services file. [Here](https://github.com/stevenGarciaDev/BugTrackerUI/blob/master/src/services/projectService.js)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Styled components have also been put into their own file 
+and imported into the component that uses it. Here is an example of the styled components for the login page. [Here](https://github.com/stevenGarciaDev/BugTrackerUI/blob/master/src/pages/login/login.styles.js)
 
-### Code Splitting
+The redux store can be found within the store directory and you can see my implementation for the User slice of the Redux store. [Here](https://github.com/stevenGarciaDev/BugTrackerUI/tree/master/src/store/user)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<hr >
 
-### Analyzing the Bundle Size
+Thank you for checking out my project.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Steven Garcia
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Website: [https://stevengarciadev.github.io/](https://stevengarciadev.github.io/)
+* LinkedIn: [https://www.linkedin.com/in/stevengarciadev/](https://www.linkedin.com/in/stevengarciadev/)
