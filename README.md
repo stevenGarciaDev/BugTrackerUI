@@ -15,18 +15,18 @@ The GitHub for the API can be found at the following [link](https://github.com/s
 
 The features implemented accomplish the goals of making the Minimum Viable Product of a Bug Tracking app.
 
-![Landing Page](./docs/landingPage_bugTracks.png "Landing Page")
+![Landing Page](https://github.com/stevenGarciaDev/BugTrackerUI/blob/master/docs/landingPage_bugtracks.PNG "Landing Page")
 
 You can sign in as a demo user so that you can quickly navigate the site and view its features.
 
 Once you are successfully authenticated with a JSON Web Token, you have the pages for viewing projects,
 creating a new project, viewing tickets, or creating a new ticket.
 
-![Create a Project](./docs/createProject_bugTracks.png "Create Project Page")
+![Create a Project](https://github.com/stevenGarciaDev/BugTrackerUI/blob/master/docs/createProject_bugTracks.PNG "Create Project Page")
 
 You are also able to view a project's details as well as view and update a ticket's details.
 
-![Edit a Ticket](./docs/editTicket_bugTracks.png "Edit a Ticket")
+![Edit a Ticket](https://github.com/stevenGarciaDev/BugTrackerUI/blob/master/docs/editTicket_bugTracks.PNG "Edit a Ticket")
 
 ## Skills Learned
 
