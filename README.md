@@ -10,6 +10,7 @@ The deployed application can be found at the following URL, [https://bugtracks.a
 The application has been deployed to Azure and setup to use CI/CD with Azure Pipelines.
 
 The GitHub for the API can be found at the following [link](https://github.com/stevenGarciaDev/BugTrackerAPI) which was developed using C#, ASP.NET Core 3.1, Entity Framework Core, and SQL Server.
+
 ## Description of App Features
 
 The features implemented accomplish the goals of making the Minimum Viable Product of a Bug Tracking app.
@@ -31,13 +32,13 @@ You are also able to view a project's details as well as view and update a ticke
 
 The skills I demonstrate in this project include the following.
 
-* Utilize Redux as single source of truth to reduce prop drilling
-* Implement styled components for organized and reusable CSS styles
-* Develop asynchronous JavaScript to make request to a Web API
-* Created controlled components for login, register, create ticket, and create project pages
-* Implement action creators, actions, reducers, and selectors for interacting with Redux Store
-* Use React Router to implement a Single Page Application
-* Deploy to Azure and setup CI/CD with Azure Pipelines through the Classic Editor
+- Utilize Redux as single source of truth to reduce prop drilling
+- Implement styled components for organized and reusable CSS styles
+- Develop asynchronous JavaScript to make request to a Web API
+- Created controlled components for login, register, create ticket, and create project pages
+- Implement action creators, actions, reducers, and selectors for interacting with Redux Store
+- Use React Router to implement a Single Page Application
+- Deploy to Azure and setup CI/CD with Azure Pipelines through the Classic Editor
 
 ## Structure of Code
 
@@ -49,7 +50,7 @@ Here is an example of a component I implemented. [Here](https://github.com/steve
 The asynchronous service calls have been organized to be in the services directory as to decouple it from the component logic.
 Here is an example for the project services file. [Here](https://github.com/stevenGarciaDev/BugTrackerUI/blob/master/src/services/projectService.js)
 
-Styled components have also been put into their own file 
+Styled components have also been put into their own file
 and imported into the component that uses it. Here is an example of the styled components for the login page. [Here](https://github.com/stevenGarciaDev/BugTrackerUI/blob/master/src/pages/login/login.styles.js)
 
 The redux store can be found within the store directory and you can see my implementation for the User slice of the Redux store. [Here](https://github.com/stevenGarciaDev/BugTrackerUI/tree/master/src/store/user)
@@ -60,5 +61,5 @@ Thank you for checking out my project.
 
 Steven Garcia
 
-* Website: [https://stevengarciadev.github.io/](https://stevengarciadev.github.io/)
-* LinkedIn: [https://www.linkedin.com/in/stevengarciadev/](https://www.linkedin.com/in/stevengarciadev/)
+- Website: [https://stevengarcia.netlify.app/](https://stevengarcia.netlify.app/)
+- LinkedIn: [https://www.linkedin.com/in/stevengarciadev/](https://www.linkedin.com/in/stevengarciadev/)
