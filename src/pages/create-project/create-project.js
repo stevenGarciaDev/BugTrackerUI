@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
-  Form, InputContainer, Input, Textarea, Button, SuccessMessage,
-} from './create-project.styles';
+  FormContainer, Form, InputContainer, Input, Textarea, Button, SuccessMessage,
+} from '../../styles/forms/forms.style';
 import PageHeadline from '../../styles/page-headline.style';
 import { createProjectAsync, setProjectSuccessMessage } from '../../store/project/project.actions';
 import { selectUserToken, selectCurrentUserId } from '../../store/user/user.selector';
@@ -86,40 +86,39 @@ const CreateProject = ({
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       {!successMessage
         && (
-        <Form onSubmit={(e) => handleSubmit(e)}>
-          <InputContainer>
-            <label htmlFor="name">Project Name</label>
-            <Input
-              type="text"
-              id="name"
-              name="name"
-              value={name}
-              onChange={(e) => handleChange(e)}
-            />
-          </InputContainer>
-
-          <InputContainer>
-            <label htmlFor="description">Short Description</label>
-            <Textarea
-              type="text"
-              id="description"
-              name="description"
-              value={description}
-              onChange={(e) => handleChange(e)}
-            />
-          </InputContainer>
-
-          <InputContainer>
-            <ProjectMemberInput
-              members={members}
-              addMember={addMember}
-              removeMember={removeMember}
-              setErrorMessage={setErrorMessage}
-            />
-          </InputContainer>
-
-          <Button type="submit">Create Project</Button>
-        </Form>
+        <FormContainer>
+          <Form onSubmit={(e) => handleSubmit(e)}>
+            <InputContainer>
+              <label htmlFor="name">Project Name</label>
+              <Input
+                type="text"
+                id="name"
+                name="name"
+                value={name}
+                onChange={(e) => handleChange(e)}
+              />
+            </InputContainer>
+            <InputContainer>
+              <label htmlFor="description">Short Description</label>
+              <Textarea
+                type="text"
+                id="description"
+                name="description"
+                value={description}
+                onChange={(e) => handleChange(e)}
+              />
+            </InputContainer>
+            <InputContainer>
+              <ProjectMemberInput
+                members={members}
+                addMember={addMember}
+                removeMember={removeMember}
+                setErrorMessage={setErrorMessage}
+              />
+            </InputContainer>
+            <Button type="submit">Create Project</Button>
+          </Form>
+        </FormContainer>
         )}
     </div>
   );

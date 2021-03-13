@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { selectUserToken } from '../../store/user/user.selector';
 import { getTicket, updateTicket } from '../../services/ticketService';
 import { getMembersForProject } from '../../services/projectService';
-import { Form, InputContainer, Button } from '../create-project/create-project.styles';
+import { Form, InputContainer, Button } from '../../styles/forms/forms.style';
 import { Select } from '../create-ticket/create-ticket.styles';
 import {
   Container, Headline, SuccessMessage, ErrorMessage,
