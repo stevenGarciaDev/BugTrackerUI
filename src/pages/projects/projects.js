@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ProjectsTable from '../../components/projects-table';
+import ProjectPreview from '../../components/project-preview';
 import PageHeadline from '../../styles/page-headline.style';
 import { selectUserProjects } from '../../store/project/project.selector';
 import { getProjects } from '../../store/project/project.actions';
 import { selectUserToken, selectCurrentUserId } from '../../store/user/user.selector';
+import { ProjectsContainer, ProjectsGrid } from './projects.styles';
 
 const Projects = ({
   userProjects, initializeProjects, userId, jwt,
@@ -22,7 +23,20 @@ const Projects = ({
         : (
           <>
             <PageHeadline>View Your Projects</PageHeadline>
-            <ProjectsTable projects={userProjects} />
+            <ProjectsContainer>
+              <ProjectsGrid>
+                {userProjects.length > 0
+                && userProjects.map((p) => (
+                  <ProjectPreview
+                    key={p.id}
+                    id={p.id}
+                    title={p.name}
+                    description={p.description}
+                    dateCreated={p.dateCreated}
+                  />
+                ))}
+              </ProjectsGrid>
+            </ProjectsContainer>
           </>
         )}
     </div>
