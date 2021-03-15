@@ -8,7 +8,8 @@ import { getMembersForProject } from '../../services/projectService';
 import { Form, InputContainer, Button } from '../../styles/forms/forms.style';
 import { Select } from '../create-ticket/create-ticket.styles';
 import {
-  Container, Headline, SuccessMessage, ErrorMessage,
+  Container, Headline, TicketInfoContainer, TicketInfo,
+  SuccessMessage, ErrorMessage,
 } from './view-ticket.styles';
 import areAllFieldsFilledOut from '../../helpers/areAllFieldsFilledOut';
 
@@ -76,16 +77,18 @@ const ViewTicket = ({ match, jwt }) => {
             <Headline>Edit Ticket</Headline>
             {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
             {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-            <p>
-              <strong>Ticket Name:</strong>
-              {' '}
-              {ticket.title}
-            </p>
-            <p>
-              <strong>Description:</strong>
-              {' '}
-              {ticket.description}
-            </p>
+            <TicketInfoContainer>
+              <TicketInfo>
+                <strong>Ticket Name:</strong>
+                {' '}
+                {ticket.title}
+              </TicketInfo>
+              <TicketInfo>
+                <strong>Description:</strong>
+                {' '}
+                {ticket.description}
+              </TicketInfo>
+            </TicketInfoContainer>
             <Form onSubmit={(e) => handleSubmit(e)}>
               <InputContainer>
                 <label htmlFor="type">Ticket Type</label>

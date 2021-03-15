@@ -11,6 +11,17 @@ export const Headline = styled.h2`
     text-align: center;
 `;
 
+export const TicketInfoContainer = styled.div`
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+`;
+
+export const TicketInfo = styled.p`
+    margin-top: 5px;
+`;
+
 export const SuccessMessage = styled.h2`
     color: green;
     font-size: 20px;
