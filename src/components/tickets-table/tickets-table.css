@@ -1,0 +1,14 @@
+.desktop-display {
+    display: none;
+}
+
+.view-button-container {
+    padding: 5px;
+}
+
+@media screen and (min-width: 700px) {
+    .desktop-display {
+        display: table-cell;
+        width: 150px;
+    }
+}
