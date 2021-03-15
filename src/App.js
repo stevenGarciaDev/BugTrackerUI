@@ -34,6 +34,7 @@ const MainContent = styled.div`
   width: 100%;
 
   @media screen and (min-width: 700px) {
+    margin-top: 60px;
     width: ${(props) => (props.isSidebarOpen ? 'calc(100% - 290px)' : '100%')};
   }
 `;

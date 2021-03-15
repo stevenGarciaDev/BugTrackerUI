@@ -8,6 +8,7 @@ export const Nav = styled.nav`
     background-color: ${(props) => props.theme.colors.darkBlue};
     color: white;
     display: flex;
+    height: 70px;
     justify-content: space-between;
     padding: 0 20px;
     position: fixed;
@@ -42,8 +43,12 @@ export const CloseNavIcon = styled(CancelIcon)`
 `;
 
 export const NavList = styled.div`
+    align-items: center;
     display: flex;
     flex-direction: row;
+    height: 70px;
+    position: relative;
+    top: -5px;
 `;
 
 export const NavTitleLink = styled(Link)`

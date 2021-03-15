@@ -30,6 +30,10 @@ export const AddMemberButton = styled.button`
     right: 0;
     top: 23px;
     width: 100px;
+
+    &:hover {
+        background-color: #006600;
+    }
 `;
 
 export const MembersContainer = styled.div`

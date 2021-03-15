@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   Button,
-} from '../create-project/create-project.styles';
+} from '../../styles/forms/forms.style';
 import {
   Container,
   Form,
