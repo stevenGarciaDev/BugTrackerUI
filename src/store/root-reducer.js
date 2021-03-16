@@ -7,14 +7,16 @@ import sidebarReducer from './sidebar/sidebar.reducer';
 import userReducer from './user/user.reducer';
 import projectReducer from './project/project.reducer';
 import ticketReducer from './ticket/ticket.reducer';
+import loadingReducer from './loading/loading.reducer';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whiteList: ['user', 'sidebar', 'projects', 'tickets'],
+  whiteList: ['loading', 'user', 'sidebar', 'projects', 'tickets'],
 };
 
 const appReducer = combineReducers({
+  loading: loadingReducer,
   sidebar: sidebarReducer,
   user: userReducer,
   projects: projectReducer,
