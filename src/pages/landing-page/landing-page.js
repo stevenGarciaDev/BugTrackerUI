@@ -19,9 +19,15 @@ import {
   UserButtonDemoLogin,
 } from './landing-page.styles';
 import { login } from '../../store/user/user.actions';
+import LoadingSpinner from '../../components/loading-spinner';
+import { startLoadingAnimation } from '../../store/loading/loading.actions';
+import { selectLoadingStatus } from '../../store/loading/loading.selector';
 
-const LandingPage = ({ performDemoLogin }) => {
+const LandingPage = ({
+  performDemoLogin, startLoading, isLoading,
+}) => {
   const handleDemoLogin = async () => {
+    startLoading();
     await performDemoLogin({
       Email: 'demouser623@gmail.com',
       Password: '$chocolate1',
@@ -50,16 +56,23 @@ const LandingPage = ({ performDemoLogin }) => {
           <Title>One-Click Demo</Title>
           <Paragraph>Login as a demo user to take a peak around, no sign in required!</Paragraph>
           <DemoUsersContainer>
-            <UserTypeContainer>
-              <UserType>Project Manager</UserType>
-              <UserAccess>Project Access</UserAccess>
-              <UserDescription>
-                Focused on the big picture with access to creating projects and tickets.
-              </UserDescription>
-              <DemoButtonContainer>
-                <UserButtonDemoLogin onClick={() => handleDemoLogin()}>Demo</UserButtonDemoLogin>
-              </DemoButtonContainer>
-            </UserTypeContainer>
+            {isLoading ? <LoadingSpinner />
+              : (
+                <UserTypeContainer>
+                  <UserType>Project Manager</UserType>
+                  <UserAccess>Project Access</UserAccess>
+                  <UserDescription>
+                    Focused on the big picture with access to creating projects and tickets.
+                  </UserDescription>
+                  <DemoButtonContainer>
+                    <UserButtonDemoLogin
+                      onClick={() => handleDemoLogin()}
+                    >
+                      Demo
+                    </UserButtonDemoLogin>
+                  </DemoButtonContainer>
+                </UserTypeContainer>
+              )}
           </DemoUsersContainer>
         </SectionContent>
       </DemoSection>
@@ -67,12 +80,19 @@ const LandingPage = ({ performDemoLogin }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  isLoading: selectLoadingStatus(state),
+});
+
 const mapDispatchToProps = (dispatch) => ({
   performDemoLogin: (demoUser) => dispatch(login(demoUser)),
+  startLoading: () => dispatch(startLoadingAnimation()),
 });
 
 LandingPage.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
   performDemoLogin: PropTypes.func.isRequired,
+  startLoading: PropTypes.func.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(LandingPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
