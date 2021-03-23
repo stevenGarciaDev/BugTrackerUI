@@ -4,6 +4,7 @@ import UserTopNavIcon from '../user-top-nav-icon';
 
 const Container = styled.div`
     align-items: center;
+    background-color: #fff;
     border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
