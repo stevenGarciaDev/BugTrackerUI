@@ -27,6 +27,11 @@ const ticketReducer = (state = INITIAL_STATE, action) => {
         successMessage: action.payload.successMessage,
         ticketErrorMessage: '',
       };
+    case TicketActionTypes.SET_TICKETS:
+      return {
+        ...state,
+        tickets: action.payload.tickets,
+      };
     default:
       return state;
   }
