@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { selectUserToken } from '../../store/user/user.selector';
+import { deleteProjectAsync } from '../../store/project/project.actions';
 
 const Container = styled.div`
     background-color: white;
@@ -29,15 +32,25 @@ const LinkItem = styled(Link)`
     }
 `;
 
-const ProjectPreviewDropdown = ({ id }) => (
+const ProjectPreviewDropdown = ({ id, jwt, deleteProject }) => (
   <Container>
     <LinkItem to={`/viewproject/${id}`}>View</LinkItem>
-    <LinkItem>Delete</LinkItem>
+    <LinkItem onClick={() => deleteProject(id, jwt)}>Delete</LinkItem>
   </Container>
 );
 
+const mapStateToProps = (state) => ({
+  jwt: selectUserToken(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  deleteProject: (id, jwt) => dispatch(deleteProjectAsync(id, jwt)),
+});
+
 ProjectPreviewDropdown.propTypes = {
   id: PropTypes.number.isRequired,
+  deleteProject: PropTypes.func.isRequired,
+  jwt: PropTypes.string.isRequired,
 };
 
-export default ProjectPreviewDropdown;
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectPreviewDropdown);
