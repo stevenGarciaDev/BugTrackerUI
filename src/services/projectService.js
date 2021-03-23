@@ -44,6 +44,7 @@ export const createProject = async (projectForm, jwt) => {
 };
 
 export const deleteProject = async (projectId, jwt) => {
-  await http.delete(`${apiEndpoint}/${projectId}`,
+  const response = await http.delete(`${apiEndpoint}/${projectId}`,
     { headers: { 'x-auth-token': jwt } });
+  return response;
 };

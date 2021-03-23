@@ -7,6 +7,11 @@ export const selectProjectSuccessMessage = createSelector(
   (projects) => projects.successMessage,
 );
 
+export const selectProjectErrorMessage = createSelector(
+  [selectProject],
+  (projects) => projects.projectErrorMessage,
+);
+
 export const selectUserProjects = createSelector(
   [selectProject],
   (projects) => projects.projects,
