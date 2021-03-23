@@ -35,6 +35,10 @@ const SidebarNav = ({ isSidebarOpen, openSidebarNav, closeSidebarNav }) => (
     <Sidebar isVisible={isSidebarOpen}>
       <NavContainer>
         <NavSection>
+          <NavSectionName>OVERVIEW</NavSectionName>
+          <NavItem to="/dashboard">Dashboard</NavItem>
+        </NavSection>
+        <NavSection>
           <NavSectionName>PROJECTS</NavSectionName>
           <NavItem to="/projects">View Projects</NavItem>
           <NavItem to="/project/create">Create New Project</NavItem>

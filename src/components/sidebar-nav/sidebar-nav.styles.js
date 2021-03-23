@@ -55,7 +55,7 @@ export const NavItem = styled(Link)`
 
 export const IconContainer = styled.div`
   position: fixed;
-  top: 10px;
+  top: 5px;
   z-index: 3;
 `;
 
