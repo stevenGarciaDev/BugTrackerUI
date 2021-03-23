@@ -6,21 +6,21 @@ import {
   FormContainer, Form, InputContainer, Input, Textarea, Button, SuccessMessage,
 } from '../../styles/forms/forms.style';
 import PageHeadline from '../../styles/page-headline.style';
-import { createProjectAsync, setProjectSuccessMessage } from '../../store/project/project.actions';
+import { createProjectAsync, setProjectSuccessMessage, setProjectErrorMessage } from '../../store/project/project.actions';
 import { selectUserToken, selectCurrentUserId } from '../../store/user/user.selector';
 import ProjectMemberInput from '../../components/add-project-member-input';
 import { ErrorMessage } from '../login/login.styles';
-import { selectProjectSuccessMessage } from '../../store/project/project.selector';
+import { selectProjectSuccessMessage, selectProjectErrorMessage } from '../../store/project/project.selector';
 
 const CreateProject = ({
   createNewProject, jwt, userId, successMessage, setSuccessMessage,
+  errorMessage, setErrorMessage,
 }) => {
   const [projectForm, setProjectForm] = useState({
     name: '',
     description: '',
     members: [],
   });
-  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -128,11 +128,13 @@ const mapStateToProps = (state) => ({
   userId: selectCurrentUserId(state),
   jwt: selectUserToken(state),
   successMessage: selectProjectSuccessMessage(state),
+  errorMessage: selectProjectErrorMessage(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   createNewProject: (form, jwt) => dispatch(createProjectAsync(form, jwt)),
   setSuccessMessage: (msg) => dispatch(setProjectSuccessMessage(msg)),
+  setErrorMessage: (msg) => dispatch(setProjectErrorMessage(msg)),
 });
 
 CreateProject.propTypes = {
@@ -141,6 +143,8 @@ CreateProject.propTypes = {
   createNewProject: PropTypes.func.isRequired,
   successMessage: PropTypes.string.isRequired,
   setSuccessMessage: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string.isRequired,
+  setErrorMessage: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateProject);
