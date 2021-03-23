@@ -16,6 +16,20 @@ axios.interceptors.response.use(null, (error) => {
   return Promise.reject(error);
 });
 
+export const handleErrorResponse = (errorResponse) => {
+  try {
+    return {
+      errorResponse,
+      message: errorResponse.response.data,
+    };
+  } catch (error) {
+    return {
+      errorResponse,
+      message: 'Unable to perform',
+    };
+  }
+};
+
 export default {
   get: axios.get,
   post: axios.post,
