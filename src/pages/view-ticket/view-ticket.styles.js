@@ -6,7 +6,7 @@ export const Container = styled.div`
 `;
 
 export const Headline = styled.h2`
-    color: grey;
+    color: #3b3b3b;
     font-size: 25px;
     text-align: center;
 `;
