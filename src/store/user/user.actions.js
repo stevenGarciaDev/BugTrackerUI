@@ -1,5 +1,6 @@
 import { UserActionTypes } from './user.types';
 import { registerUser, loginUser } from '../../services/authService';
+import { stopLoadingAnimation } from '../loading/loading.actions';
 
 export const authenticateSuccess = (userDataTransferObject) => ({
   type: UserActionTypes.AUTHENTICATE_SUCCESS,
@@ -29,6 +30,7 @@ export const register = (registerForm) => async (dispatch) => {
   } catch (error) {
     dispatch(authenticateFailure(error.message));
   }
+  dispatch(stopLoadingAnimation());
 };
 
 export const login = (loginForm) => async (dispatch) => {
@@ -38,4 +40,5 @@ export const login = (loginForm) => async (dispatch) => {
   } catch (error) {
     dispatch(authenticateFailure(error.message));
   }
+  dispatch(stopLoadingAnimation());
 };

@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import http from './httpService';
+import http, { handleErrorResponse } from './httpService';
 
 const apiEndpoint = '/users';
 
@@ -9,9 +9,6 @@ export const getByUsername = async (username) => {
       .get(`${apiEndpoint}/member/${username}`);
     return response.data;
   } catch (error) {
-    return {
-      error,
-      message: error.response.data,
-    };
+    return handleErrorResponse();
   }
 };

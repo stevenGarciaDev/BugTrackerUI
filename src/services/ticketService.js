@@ -50,6 +50,20 @@ export const getTicketsForProject = async (projectId, jwt) => {
   }
 };
 
+export const getAllTicketsForAllUsersProjects = async (userId, jwt) => {
+  try {
+    const tickets = await http.get(`${apiEndpoint}/all-projects/${userId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+    return tickets.data;
+  } catch (error) {
+    return error.message;
+  }
+};
+
 export const createTicket = async (ticketForm, createdByUserId, jwt) => {
   const newTicket = await http.post(`${apiEndpoint}`,
     { ...ticketForm, createdByUserId },

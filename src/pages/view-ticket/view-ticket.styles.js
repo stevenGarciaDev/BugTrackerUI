@@ -6,7 +6,7 @@ export const Container = styled.div`
 `;
 
 export const Headline = styled.h2`
-    color: grey;
+    color: #3b3b3b;
     font-size: 25px;
     text-align: center;
 `;
@@ -16,6 +16,7 @@ export const TicketInfoContainer = styled.div`
     display: flex;
     flex-direction: column;
     margin: 0 auto;
+    max-width: 800px;
 `;
 
 export const TicketInfo = styled.p`

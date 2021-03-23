@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="71px" height="71px" viewBox="0 0 71 71" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>23760CF3-BDEF-4C94-ADBF-195770E90005</title>
+    <g id="Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="search_page-loading" transform="translate(-685.000000, -294.000000)" fill="#FEB756" fill-rule="nonzero">
+            <path d="M720.5,294 C739.910048,294 755.681751,309.577603 755.995244,328.912943 L756,329.5 L750,329.5 C750,313.2076 736.7924,300 720.5,300 C704.2076,300 691,313.2076 691,329.5 C691,345.629476 703.944769,358.73554 720.012164,358.996048 L720.5,359 L720.5,365 C700.893891,365 685,349.106109 685,329.5 C685,309.893891 700.893891,294 720.5,294 Z" id="loading_spinner"></path>
+        </g>
+    </g>
+</svg>

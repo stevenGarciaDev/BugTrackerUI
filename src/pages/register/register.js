@@ -18,8 +18,13 @@ import { Select } from '../create-ticket/create-ticket.styles';
 import { selectUserError } from '../../store/user/user.selector';
 import { register, setErrorMessage } from '../../store/user/user.actions';
 import areAllFieldsFilledOut from '../../helpers/areAllFieldsFilledOut';
+import LoadingSpinner from '../../components/loading-spinner';
+import { startLoadingAnimation } from '../../store/loading/loading.actions';
+import { selectLoadingStatus } from '../../store/loading/loading.selector';
 
-const Register = ({ performRegistration, setError, formError }) => {
+const Register = ({
+  performRegistration, setError, formError, startLoading, isLoading,
+}) => {
   const [registerForm, setRegisterForm] = useState({
     UserName: '',
     Email: '',
@@ -36,6 +41,7 @@ const Register = ({ performRegistration, setError, formError }) => {
 
     const minPasswordLength = 6;
     if (registerForm.Password.length >= minPasswordLength) {
+      startLoading();
       await performRegistration(registerForm);
     } else {
       setError('Password must be 6 characters or more');
@@ -64,43 +70,48 @@ const Register = ({ performRegistration, setError, formError }) => {
   } = registerForm;
   return (
     <Container>
-      <Form onSubmit={(e) => handleSubmit(e)}>
-        <Title>Create an account</Title>
-        {formError && <ErrorMessage>{formError}</ErrorMessage>}
-        <InputControl>
-          <Label>Username</Label>
-          <Input type="text" value={UserName} name="UserName" onChange={(e) => handleChange(e)} />
-        </InputControl>
-        <InputControl>
-          <Label>Email</Label>
-          <Input type="email" value={Email} name="Email" onChange={(e) => handleChange(e)} />
-        </InputControl>
-        <InputControl>
-          <Label>Job Title</Label>
-          <Select type="text" value={JobTitle} name="JobTitle" onChange={(e) => handleChange(e)}>
-            <option value="Manager">Project Manager</option>
-            <option value="Developer">Developer</option>
-          </Select>
-        </InputControl>
-        <InputControl>
-          <Label>Password</Label>
-          <Input type="password" value={Password} name="Password" onChange={(e) => handleChange(e)} />
-        </InputControl>
-        <ButtonContainer>
-          <Button>Register</Button>
-        </ButtonContainer>
-      </Form>
+      {isLoading ? <LoadingSpinner />
+        : (
+          <Form onSubmit={(e) => handleSubmit(e)}>
+            <Title>Create an account</Title>
+            {formError && <ErrorMessage>{formError}</ErrorMessage>}
+            <InputControl>
+              <Label>Username</Label>
+              <Input type="text" value={UserName} name="UserName" onChange={(e) => handleChange(e)} />
+            </InputControl>
+            <InputControl>
+              <Label>Email</Label>
+              <Input type="email" value={Email} name="Email" onChange={(e) => handleChange(e)} />
+            </InputControl>
+            <InputControl>
+              <Label>Job Title</Label>
+              <Select type="text" value={JobTitle} name="JobTitle" onChange={(e) => handleChange(e)}>
+                <option value="Manager">Project Manager</option>
+                <option value="Developer">Developer</option>
+              </Select>
+            </InputControl>
+            <InputControl>
+              <Label>Password</Label>
+              <Input type="password" value={Password} name="Password" onChange={(e) => handleChange(e)} />
+            </InputControl>
+            <ButtonContainer>
+              <Button>Register</Button>
+            </ButtonContainer>
+          </Form>
+        )}
     </Container>
   );
 };
 
 const mapStateToProps = (state) => ({
   formError: selectUserError(state),
+  isLoading: selectLoadingStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   performRegistration: (registerForm) => dispatch(register(registerForm)),
   setError: (message) => dispatch(setErrorMessage(message)),
+  startLoading: () => dispatch(startLoadingAnimation()),
 });
 
 Register.defaultProps = {
@@ -111,6 +122,8 @@ Register.propTypes = {
   formError: PropTypes.string,
   performRegistration: PropTypes.func.isRequired,
   setError: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  startLoading: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

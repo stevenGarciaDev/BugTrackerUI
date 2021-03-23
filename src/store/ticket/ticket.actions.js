@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { TicketActionTypes } from './ticket.types';
-import { createTicket } from '../../services/ticketService';
+import { createTicket, getAllTicketsForAllUsersProjects } from '../../services/ticketService';
 
 export const setTicketErrorMessage = (errorMessage) => ({
   type: TicketActionTypes.SET_TICKET_ERROR_MESSAGE,
@@ -23,10 +23,26 @@ export const createTicketSuccess = (ticket) => ({
   },
 });
 
+export const setTickets = (tickets) => ({
+  type: TicketActionTypes.SET_TICKETS,
+  payload: {
+    tickets,
+  },
+});
+
 export const createNewTicket = (ticketForm, userId, jwt) => async (dispatch) => {
   try {
     const response = await createTicket(ticketForm, userId, jwt);
     dispatch(createTicketSuccess(response));
+  } catch (err) {
+    dispatch(setTicketErrorMessage(err.message));
+  }
+};
+
+export const getAllTicketsForProjects = (userId, jwt) => async (dispatch) => {
+  try {
+    const response = await getAllTicketsForAllUsersProjects(userId, jwt);
+    dispatch(setTickets(response));
   } catch (err) {
     dispatch(setTicketErrorMessage(err.message));
   }

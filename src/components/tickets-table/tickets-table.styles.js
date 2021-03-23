@@ -17,8 +17,8 @@ export const Table = styled.table`
     border: 1px solid #ccc;
     color: black;
     font-size: 14px;
-    margin-top: 12px;
     text-align: left;
+    width: 100%;
 `;
 
 export const TableRow = styled.tr`

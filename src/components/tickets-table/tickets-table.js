@@ -1,20 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Container, Table, TableHeadData, TableRow, TableData, Column, Button,
+  Container, Table, TableHeadData, TableRow, TableData, Button,
 } from './tickets-table.styles';
 import './tickets-table.css';
 
 const TicketsTable = ({ tickets = [] }) => (
   <Container>
     <Table>
-      <colgroup>
-        <Column width={350} />
-        <Column className="desktop-display" width={150} />
-        <Column className="desktop-display" width={150} />
-        <Column className="desktop-display" width={150} />
-        <Column className="desktop-display" width={150} />
-      </colgroup>
       <thead>
         <TableRow>
           <TableHeadData>Title</TableHeadData>

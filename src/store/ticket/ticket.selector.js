@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 export const getTicketsSlice = (state) => state.tickets;
 
-export const getAllTickets = createSelector(
+export const selectAllTickets = createSelector(
   [getTicketsSlice],
   (ticketSlice) => ticketSlice.tickets,
 );
