@@ -21,9 +21,11 @@ const CreateProject = ({
     description: '',
     members: [],
   });
+  const [hasSubmitted, setAsSubmitted] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setAsSubmitted(true);
     if (projectForm.name === '' || projectForm.description === '' || projectForm.members.length === 0) {
       setErrorMessage('You must fill out all the form fields.');
       return;
@@ -83,7 +85,7 @@ const CreateProject = ({
     <div>
       <PageHeadline>Create a New Project</PageHeadline>
       {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {(hasSubmitted && errorMessage) && <ErrorMessage>{errorMessage}</ErrorMessage>}
       {!successMessage
         && (
         <FormContainer>
