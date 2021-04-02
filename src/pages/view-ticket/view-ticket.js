@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { selectUserToken } from '../../store/user/user.selector';
-import { getTicket, updateTicket } from '../../services/ticketService';
+import { getTicketErrorMessage, getTicketSuccessMessage } from '../../store/ticket/ticket.selector';
+import { updateProjectTicket, setTicketSuccessMessage, setTicketErrorMessage } from '../../store/ticket/ticket.actions';
+import { getTicket } from '../../services/ticketService';
 import { getMembersForProject } from '../../services/projectService';
 import { Form, InputContainer, Button } from '../../styles/forms/forms.style';
 import { Select } from '../create-ticket/create-ticket.styles';
@@ -13,27 +15,21 @@ import {
 } from './view-ticket.styles';
 import areAllFieldsFilledOut from '../../helpers/areAllFieldsFilledOut';
 
-const ViewTicket = ({ match, jwt }) => {
+const ViewTicket = ({
+  match, jwt, saveTicketEdit, successMessage, errorMessage, setSuccessMessage, setErrorMessage,
+}) => {
   const { ticketId, projectId } = match.params;
   const [ticket, setTicket] = useState(undefined);
   const [members, setMembers] = useState([]);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!areAllFieldsFilledOut(ticket)) {
+      setSuccessMessage('');
       setErrorMessage('Please ensure the ticket is assigned to a user.');
       return;
     }
-    const response = await updateTicket(ticket, ticketId, jwt);
-    if (typeof (response) === 'string') {
-      setErrorMessage('Unable to update ticket.');
-      setSuccessMessage('');
-    } else {
-      setErrorMessage('');
-      setSuccessMessage('Successfully updated the project.');
-    }
+    await saveTicketEdit(ticket, ticketId, jwt);
   };
 
   const handleChangeToTicket = (event) => {
@@ -64,6 +60,8 @@ const ViewTicket = ({ match, jwt }) => {
       const projectMembers = await getMembersForProject(projectId, jwt);
       setMembers(projectMembers);
     }
+    setErrorMessage('');
+    setSuccessMessage('');
     initializeTicket();
     initializeMembers();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -148,7 +146,7 @@ const ViewTicket = ({ match, jwt }) => {
                   <option>{' '}</option>
                   {members.length > 0
                   && members.map((m) => (
-                    <option value={m.userName}>{m.userName}</option>
+                    <option key={m.id} value={m.userName}>{m.userName}</option>
                   ))}
                 </Select>
               </InputContainer>
@@ -170,10 +168,23 @@ ViewTicket.propTypes = {
     }),
   }).isRequired,
   jwt: PropTypes.string.isRequired,
+  saveTicketEdit: PropTypes.func.isRequired,
+  setSuccessMessage: PropTypes.func.isRequired,
+  setErrorMessage: PropTypes.func.isRequired,
+  successMessage: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   jwt: selectUserToken(state),
+  successMessage: getTicketSuccessMessage(state),
+  errorMessage: getTicketErrorMessage(state),
 });
 
-export default connect(mapStateToProps)(ViewTicket);
+const mapDispatchToProps = (dispatch) => ({
+  saveTicketEdit: (ticket, ticketId, jwt) => dispatch(updateProjectTicket(ticket, ticketId, jwt)),
+  setSuccessMessage: (msg) => dispatch(setTicketSuccessMessage(msg)),
+  setErrorMessage: (msg) => dispatch(setTicketErrorMessage(msg)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViewTicket);
