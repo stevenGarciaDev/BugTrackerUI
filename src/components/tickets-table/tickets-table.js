@@ -20,7 +20,7 @@ const TicketsTable = ({ tickets = [] }) => (
       <tbody>
         {tickets.length > 0
         && tickets.map((t) => (
-          <TableRow>
+          <TableRow key={t.id}>
             <TableData>{t.title}</TableData>
             <TableData className="desktop-display">{t.priority}</TableData>
             <TableData className="desktop-display">{t.userName}</TableData>
