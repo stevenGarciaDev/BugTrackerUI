@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import { TicketActionTypes } from './ticket.types';
 
 const INITIAL_STATE = {
@@ -31,6 +32,14 @@ const ticketReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         tickets: action.payload.tickets,
+      };
+    case TicketActionTypes.UPDATE_TICKET:
+      const { ticket } = action.payload;
+      return {
+        ...state,
+        tickets: state.tickets.map((t) => ((t.id === ticket.id) ? ticket : t)),
+        successMessage: 'Successfully updated the ticket.',
+        errorMessage: '',
       };
     default:
       return state;
