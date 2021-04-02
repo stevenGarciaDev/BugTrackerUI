@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { selectUserToken } from '../../store/user/user.selector';
 import { getTicketErrorMessage, getTicketSuccessMessage } from '../../store/ticket/ticket.selector';
 import { updateProjectTicket, setTicketSuccessMessage, setTicketErrorMessage } from '../../store/ticket/ticket.actions';
 import { getTicket } from '../../services/ticketService';
@@ -14,6 +13,7 @@ import {
   SuccessMessage, ErrorMessage,
 } from './view-ticket.styles';
 import areAllFieldsFilledOut from '../../helpers/areAllFieldsFilledOut';
+import withUserTokenAndID from '../../higher-order-components/withUserTokenAndID';
 
 const ViewTicket = ({
   match, jwt, saveTicketEdit, successMessage, errorMessage, setSuccessMessage, setErrorMessage,
@@ -176,7 +176,6 @@ ViewTicket.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  jwt: selectUserToken(state),
   successMessage: getTicketSuccessMessage(state),
   errorMessage: getTicketErrorMessage(state),
 });
@@ -187,4 +186,6 @@ const mapDispatchToProps = (dispatch) => ({
   setErrorMessage: (msg) => dispatch(setTicketErrorMessage(msg)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewTicket);
+const ConnectedViewTicket = connect(mapStateToProps, mapDispatchToProps)(ViewTicket);
+
+export default withUserTokenAndID(ConnectedViewTicket);

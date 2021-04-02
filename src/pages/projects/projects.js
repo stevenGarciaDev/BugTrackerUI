@@ -5,8 +5,8 @@ import ProjectPreview from '../../components/project-preview';
 import PageHeadline from '../../styles/page-headline.style';
 import { selectUserProjects } from '../../store/project/project.selector';
 import { getProjects } from '../../store/project/project.actions';
-import { selectUserToken, selectCurrentUserId } from '../../store/user/user.selector';
 import { ProjectsContainer, ProjectsGrid } from './projects.styles';
+import withUserTokenAndID from '../../higher-order-components/withUserTokenAndID';
 
 const Projects = ({
   userProjects, initializeProjects, userId, jwt,
@@ -45,8 +45,6 @@ const Projects = ({
 
 const mapStateToProps = (state) => ({
   userProjects: selectUserProjects(state),
-  userId: selectCurrentUserId(state),
-  jwt: selectUserToken(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -62,4 +60,6 @@ Projects.propTypes = {
   jwt: PropTypes.string.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Projects);
+const ConnectedProjects = connect(mapStateToProps, mapDispatchToProps)(Projects);
+
+export default withUserTokenAndID(ConnectedProjects);

@@ -7,10 +7,10 @@ import {
 } from '../../styles/forms/forms.style';
 import PageHeadline from '../../styles/page-headline.style';
 import { createProjectAsync, setProjectSuccessMessage, setProjectErrorMessage } from '../../store/project/project.actions';
-import { selectUserToken, selectCurrentUserId } from '../../store/user/user.selector';
 import ProjectMemberInput from '../../components/add-project-member-input';
 import { ErrorMessage } from '../login/login.styles';
 import { selectProjectSuccessMessage, selectProjectErrorMessage } from '../../store/project/project.selector';
+import withUserTokenAndID from '../../higher-order-components/withUserTokenAndID';
 
 const CreateProject = ({
   createNewProject, jwt, userId, successMessage, setSuccessMessage,
@@ -127,8 +127,6 @@ const CreateProject = ({
 };
 
 const mapStateToProps = (state) => ({
-  userId: selectCurrentUserId(state),
-  jwt: selectUserToken(state),
   successMessage: selectProjectSuccessMessage(state),
   errorMessage: selectProjectErrorMessage(state),
 });
@@ -149,4 +147,6 @@ CreateProject.propTypes = {
   setErrorMessage: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateProject);
+const ConnectedCreateProject = connect(mapStateToProps, mapDispatchToProps)(CreateProject);
+
+export default withUserTokenAndID(ConnectedCreateProject);

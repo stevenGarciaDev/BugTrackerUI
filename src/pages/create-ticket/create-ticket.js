@@ -9,11 +9,11 @@ import { Select } from './create-ticket.styles';
 import PageHeadline from '../../styles/page-headline.style';
 import { ErrorMessage } from '../login/login.styles';
 import { getProjects } from '../../store/project/project.actions';
-import { selectUserToken, selectCurrentUserId } from '../../store/user/user.selector';
 import { selectUserProjects } from '../../store/project/project.selector';
 import { setTicketErrorMessage, setTicketSuccessMessage, createNewTicket } from '../../store/ticket/ticket.actions';
 import { getTicketErrorMessage, getTicketSuccessMessage } from '../../store/ticket/ticket.selector';
 import areAllFieldsFilledOut from '../../helpers/areAllFieldsFilledOut';
+import withUserTokenAndID from '../../higher-order-components/withUserTokenAndID';
 
 const CreateTicket = ({
   initializeProjects, userProjects, userId, jwt, setError, errorMessage,
@@ -133,8 +133,6 @@ const CreateTicket = ({
 
 const mapStateToProps = (state) => ({
   userProjects: selectUserProjects(state),
-  userId: selectCurrentUserId(state),
-  jwt: selectUserToken(state),
   errorMessage: getTicketErrorMessage(state),
   successMessage: getTicketSuccessMessage(state),
 });
@@ -162,4 +160,6 @@ CreateTicket.propTypes = {
   successMessage: PropTypes.string.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateTicket);
+const ConnectedCreateTicket = connect(mapStateToProps, mapDispatchToProps)(CreateTicket);
+
+export default withUserTokenAndID(ConnectedCreateTicket);

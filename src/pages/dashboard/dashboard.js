@@ -9,11 +9,11 @@ import {
   selectAllTickets, selectTicketCountForUI, selectTicketCountForBackend, selectTicketCountForDevops,
   selectCompletedTicketsCount, selectIncompleteTicketsCount,
 } from '../../store/ticket/ticket.selector';
-import { selectUserToken, selectCurrentUserId } from '../../store/user/user.selector';
 import {
   DashboardContainer, PageTitle, Subheadline, TicketsDetailContainer, TicketsInfoContainer,
   TicketInfo, ChartContainer, SectionName, NewTicketsContainer,
 } from './dashboard.styles';
+import withUserTokenAndID from '../../higher-order-components/withUserTokenAndID';
 
 const Dashboard = ({
   tickets, userId, jwt, initializeTickets,
@@ -67,8 +67,6 @@ const Dashboard = ({
 
 const mapStateToProps = (state) => ({
   tickets: selectAllTickets(state),
-  userId: selectCurrentUserId(state),
-  jwt: selectUserToken(state),
   uiTicketsCount: selectTicketCountForUI(state),
   backendTicketsCount: selectTicketCountForBackend(state),
   devopsTicketsCount: selectTicketCountForDevops(state),
@@ -94,4 +92,6 @@ Dashboard.propTypes = {
   incompleteTicketsCount: PropTypes.number.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+const ConnectedDashboard = connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+
+export default withUserTokenAndID(ConnectedDashboard);

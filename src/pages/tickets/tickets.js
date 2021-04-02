@@ -1,11 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TicketsTable from '../../components/tickets-table';
 import PageHeadline from '../../styles/page-headline.style';
-import { selectUserToken, selectCurrentUserId } from '../../store/user/user.selector';
 import { getAllTicketsForUser } from '../../services/ticketService';
+import withUserTokenAndID from '../../higher-order-components/withUserTokenAndID';
 
 const Tickets = ({ userId, jwt }) => {
   const [tickets, setTickets] = useState(undefined);
@@ -35,9 +34,4 @@ Tickets.propTypes = {
   jwt: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  userId: selectCurrentUserId(state),
-  jwt: selectUserToken(state),
-});
-
-export default connect(mapStateToProps)(Tickets);
+export default withUserTokenAndID(Tickets);
