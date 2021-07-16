@@ -16,7 +16,7 @@ export const selectCurrentUser = createSelector(
 
 export const selectCurrentUserId = createSelector(
   [selectCurrentUser],
-  (user) => parseInt(user.nameid, 10),
+  (user) => user != null && parseInt(user.nameid, 10),
 );
 
 export const selectUserName = createSelector(

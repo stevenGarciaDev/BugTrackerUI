@@ -19,22 +19,22 @@ export const getTicketSuccessMessage = createSelector(
 
 export const selectTicketCountForUI = createSelector(
   [selectAllTickets],
-  (tickets) => tickets.filter((t) => t.type === 'UI').length,
+  (tickets) => tickets != null && tickets.filter((t) => t.type === 'UI').length,
 );
 
 export const selectTicketCountForBackend = createSelector(
   [selectAllTickets],
-  (tickets) => tickets.filter((t) => t.type === 'Backend').length,
+  (tickets) => tickets && tickets.filter((t) => t.type === 'Backend').length,
 );
 
 export const selectTicketCountForDevops = createSelector(
   [selectAllTickets],
-  (tickets) => tickets.filter((t) => t.type === 'Devops').length,
+  (tickets) => tickets && tickets.filter((t) => t.type === 'Devops').length,
 );
 
 export const selectCompletedTicketsCount = createSelector(
   [selectAllTickets],
-  (tickets) => tickets.filter((t) => t.status === 'Completed').length,
+  (tickets) => tickets && tickets.filter((t) => t.status === 'Completed').length,
 );
 
 export const selectIncompleteTicketsCount = createSelector(
