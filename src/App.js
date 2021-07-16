@@ -39,7 +39,7 @@ const MainContent = styled.div`
   }
 `;
 
-function App({ isSidebarOpen, userToken }) {
+function App({ isSidebarOpen, userToken = '' }) {
   return (
     <ThemeProvider theme={theme}>
       <Normalize />
@@ -88,7 +88,11 @@ const mapStateToProps = (state) => ({
 
 App.propTypes = {
   isSidebarOpen: PropTypes.bool.isRequired,
-  userToken: PropTypes.string.isRequired,
+  userToken: PropTypes.string,
+};
+
+App.defaultProps = {
+  userToken: '',
 };
 
 export default connect(mapStateToProps)(App);
