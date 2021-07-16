@@ -43,7 +43,11 @@ TicketsTable.propTypes = {
     status: PropTypes.string.isRequired,
     projectId: PropTypes.number.isRequired,
     userName: PropTypes.string.isRequired,
-  })).isRequired,
+  })),
+};
+
+TicketsTable.defaultProps = {
+  tickets: [],
 };
 
 export default TicketsTable;
