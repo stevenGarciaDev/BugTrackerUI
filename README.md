@@ -7,13 +7,13 @@ their project tasks.
 
 The deployed application can be found at the following URL, [https://bugtracks.azurewebsites.net/](https://bugtracks.azurewebsites.net/).
 
-The application has been deployed to Azure and setup to use CI/CD with Azure Pipelines.
+The application has been deployed to Heroku.
 
 The GitHub for the API can be found at the following [link](https://github.com/stevenGarciaDev/BugTrackerAPI) which was developed using C#, ASP.NET Core 3.1, Entity Framework Core, and SQL Server.
 
 ## Description of App Features
 
-The features implemented accomplish the goals of making the Minimum Viable Product of a Bug Tracking app.
+The features implemented accomplish the goal of making the Minimum Viable Product of a Bug Tracking app.
 
 ![Landing Page](https://github.com/stevenGarciaDev/BugTrackerUI/blob/master/docs/landingPage_bugtracks.PNG "Landing Page")
 
@@ -38,7 +38,6 @@ The skills I demonstrate in this project include the following.
 - Created controlled components for login, register, create ticket, and create project pages
 - Implement action creators, actions, reducers, and selectors for interacting with Redux Store
 - Use React Router to implement a Single Page Application
-- Deploy to Azure and setup CI/CD with Azure Pipelines through the Classic Editor
 
 ## Structure of Code
 
