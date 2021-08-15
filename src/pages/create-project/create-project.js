@@ -57,6 +57,12 @@ const CreateProject = ({
   };
 
   const addMember = (member) => {
+    const existingIndex = projectForm.members.findIndex(m => m.id == member.id);
+    if (existingIndex != -1) {
+      setErrorMessage(`Member with the name of '${member.userName}' has already been added.`);
+      return;
+    }
+
     const projectMembers = [member, ...projectForm.members];
 
     setProjectForm({
@@ -85,7 +91,7 @@ const CreateProject = ({
     <div>
       <PageHeadline>Create a New Project</PageHeadline>
       {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
-      {(hasSubmitted && errorMessage) && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       {!successMessage
         && (
         <FormContainer>

@@ -2,6 +2,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { MdDashboard, MdAddBox } from 'react-icons/md';
+import { BsListCheck } from 'react-icons/bs';
+import { CgPlayListAdd } from 'react-icons/cg';
+import { AiFillSchedule } from 'react-icons/ai';
 import {
   Sidebar,
   NavContainer,
@@ -11,6 +15,7 @@ import {
   OpenSidebarIcon,
   CloseSidebarIcon,
   IconContainer,
+  LinkText,
 } from './sidebar-nav.styles';
 import { selectSidebarStatus } from '../../store/sidebar/sidebar.selector';
 import { openSidebar, closeSidebar } from '../../store/sidebar/sidebar.actions';
@@ -36,17 +41,32 @@ const SidebarNav = ({ isSidebarOpen, openSidebarNav, closeSidebarNav }) => (
       <NavContainer>
         <NavSection>
           <NavSectionName>OVERVIEW</NavSectionName>
-          <NavItem to="/dashboard">Dashboard</NavItem>
+          <NavItem to="/dashboard">
+            <MdDashboard />
+            <LinkText>Dashboard</LinkText>
+            </NavItem>
         </NavSection>
         <NavSection>
           <NavSectionName>PROJECTS</NavSectionName>
-          <NavItem to="/projects">View Projects</NavItem>
-          <NavItem to="/project/create">Create New Project</NavItem>
+          <NavItem to="/projects">
+            <AiFillSchedule />
+            <LinkText>View Projects</LinkText>
+          </NavItem>
+          <NavItem to="/project/create">
+            <MdAddBox />
+            <LinkText>Create New Project</LinkText>
+          </NavItem>
         </NavSection>
         <NavSection>
           <NavSectionName>TICKETS</NavSectionName>
-          <NavItem to="/tickets">View Tickets</NavItem>
-          <NavItem to="/ticket/create">Create New Ticket</NavItem>
+          <NavItem to="/tickets">
+            <BsListCheck />
+            <LinkText>View Tickets</LinkText>
+            </NavItem>
+          <NavItem to="/ticket/create">
+            <CgPlayListAdd />
+            <LinkText>Create New Ticket</LinkText>
+          </NavItem>
         </NavSection>
       </NavContainer>
     </Sidebar>

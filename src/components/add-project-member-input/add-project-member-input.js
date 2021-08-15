@@ -27,8 +27,9 @@ const ProjectMemberInput = ({
       return;
     }
     const newMember = await getByUsername(memberName);
-    if ('error' in newMember) {
-      setErrorMessage(newMember.message);
+
+    if ('errorResponse' in newMember) {
+      setErrorMessage(`Unable to add a user with the name of '${memberName}'.`);
       return;
     }
     addMember(newMember);

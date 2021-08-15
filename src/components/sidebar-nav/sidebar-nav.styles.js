@@ -9,7 +9,7 @@ export const Sidebar = styled.div`
     height: 100vh;
     left: 0;
     max-width: 290px;
-    min-width: 230px;
+    min-width: 250px;
     padding: 10px;
     position: fixed;
     top: 0;
@@ -42,15 +42,21 @@ export const NavSectionName = styled.h2`
 `;
 
 export const NavItem = styled(Link)`
+    align-items: center;
     color: white;
+    display: flex;
     font-family: ${(props) => props.theme.headline};
-    font-size: 16px;
+    font-size: 18px;
     margin: 10px;
     text-decoration: none;
 
     &:hover {
       color: gray;
     }
+`;
+
+export const LinkText = styled.span`
+  margin-left: 10px;
 `;
 
 export const IconContainer = styled.div`
